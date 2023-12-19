@@ -1,6 +1,6 @@
 # sort_algos_perf
 
-Assignment for HDU 2023 fall course *Preliminary Program Designing and Algorithms*.
+Assignment 1 for HDU 2023 fall course *Preliminary Program Designing and Algorithms*.
 
 Compare the performance for various sorting algorithms, including:
 

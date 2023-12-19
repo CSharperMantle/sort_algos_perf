@@ -14,7 +14,7 @@ Compare the performance for various sorting algorithms, including:
 
 ## Third-party libraries
 
-* [`ESultanic/mtwister`](https://github.com/ESultanic/mtwister) (Public Domain): modified for random number generation
+* [`ESultanik/mtwister`](https://github.com/ESultanik/mtwister) (Public Domain): modified for random number generation
 
 ## License
 

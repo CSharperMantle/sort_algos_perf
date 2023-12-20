@@ -1,0 +1,745 @@
+\documentclass[12pt]{article}
+
+\usepackage{xeCJK}
+\usepackage{ctex}
+\usepackage{pdfpages}
+\usepackage{titlesec}
+\usepackage{fontspec}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{subfigure}
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+\usepackage{bm}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[L]{程序设计实践报告}
+\fancyfoot[R]{\thepage}
+\fancyfoot[C]{}
+
+\geometry{a4paper,footskip=4cm}
+
+\titleformat{\title}
+{\centering\bfseries \zihao{4} \heiti}
+{\thesection}
+{1em}
+{}
+
+\titleformat{\section}
+{\centering \color{xblue} \bfseries \zihao{4} \heiti}
+{\thesection}
+{1em}
+{}
+
+\titleformat{\subsection}
+{\raggedright\bfseries \zihao{-4} \heiti}
+{\thesubsection}
+{1em}
+{}
+
+\titleformat{\subsubsection}
+{\raggedright\bfseries \zihao{-4} \heiti}
+{\thesubsubsection}
+{1em}
+{}
+
+\definecolor{xblue}{RGB}{0,0,148}
+
+% \setCJKmainfont{simsun.ttc}
+
+\setmonofont{CascadiaCode.ttf}
+
+\lstset{
+    backgroundcolor=\color{white},
+    keywordstyle=\color{blue},
+    numberstyle=\color[RGB]{0,192,192},
+    commentstyle=\color[RGB]{0,96,96},
+    stringstyle=\color[RGB]{128,0,0},
+    columns=fullflexible,
+    breaklines=true,
+    captionpos=b,
+    tabsize=4,
+    numbers=left,
+    frame=single,
+    basicstyle=\ttfamily
+}
+
+\urlstyle{same}
+
+\floatname{algorithm}{算法}
+\renewcommand{\algorithmicrequire}{\textbf{输入:}}
+\renewcommand{\algorithmicensure}{\textbf{输出:}}
+
+\begin{document}
+
+\begin{titlepage}
+
+\newgeometry{top=2cm,left=2cm}
+
+\parbox[c]{8cm}{
+    \includegraphics[width=8cm]{assets/hdu.png}
+}
+
+\setlength{\parindent}{0pt}
+\centering
+\vfill
+{\zihao{-0} \heiti \textcolor{xblue}{程序设计实践报告}\par}
+\vspace{10pt}
+{\zihao{-2} \heiti 基于 C 语言的排序算法设计以及效率分析\par}
+\vfill
+{\large \heiti 卓越学院\par
+计算机科学英才班\par
+鲍溶\par
+23060827\par
+}
+\vfill
+\restoregeometry
+
+\end{titlepage}
+
+\renewcommand\contentsname{\textcolor{xblue}{目录}}
+    \tableofcontents
+\clearpage
+\setcounter{page}{1}
+
+\section{问题描述}
+
+编写程序, 实现冒泡排序、 简单选择排序、 简单插入排序、 归并排序、 快速排序函数、 调用标准库函数排序、 其它特殊排序算法 (至少一种), 并产生规模分别为 1000、 10000、 100000、 1000000、 10000000 的模拟数组, 使用上述排序方法分别对同样的模拟数据进行排序, 在验证排序结果正确性的同时, 利用系统时间函数分别记录各排序开始前时间和排序完成时时间, 计算出各排序所需时间. 再对已排序数据稍加次序调整, 模拟几乎有序数组, 再重复上述排序过程.
+
+总结、 分析程序测试结果, 撰写排序算法实现与性能评测专题报告, 报告内容完整、 规范, 内容需包括: 封面、 目录、 问题描述、 主要算法 (如果有: 和数据结构设计)、 测试结果、 结果分析、 小结, 附规范完整程序.
+
+需注意, 各排序算法需要通过函数参数与外部待排序序列交换信息, 函数内不使用全局变量, 体现出模块化程序设计原则, 便于算法推广使用; 各排序结果需使用检测函数检测正确性; 测试结果记录在表格里, 纵向是问题规模、 横向是排序方法, 这样可以提供直观对比效果, 分无序序列和几乎有序序列两个评测结果表格，超时需说明标准; 测试结果分析应该包含算法理论时间复杂度和测试结果是否吻合分析.
+
+\section{主要算法}
+
+\subsection{冒泡排序}
+
+\subsection{直接插入排序}
+
+\subsection{直接选择排序}
+
+\subsection{归并排序}
+
+\subsection{以最末位元素为主元的快速排序}
+
+\subsection{由 \texttt{stdlib.h} 提供的 \texttt{qsort}}
+
+\subsection{基于 QuickPerm 的确定性猴子排序}
+
+\section{实验设计}
+
+在本次实验中, 我们需要在验证所实现的排序算法的正确性的情况下, 比较不同排序算法在不同特征输入下的性能.
+
+\subsection{正确性检验}
+
+由于标准库提供了 \texttt{qsort} 函数作为参考实现, 我们可以对比自行实现排序算法的输出结果与标注库 \texttt{qsort} 的输出结果, 以对算法正确性进行不完全归纳证明. 这里, 我们设计算法 \ref{algo_correctness} 进行正确性检验.
+
+\begin{algorithm}
+\caption{使用不完全归纳检验排序算法的正确性.}
+\label{algo_correctness}
+\begin{algorithmic}[1]
+\Require 待检测排序函数 $\mathsf{Sort}(\cdot),$ 参考排序函数 $\mathsf{Sort}^*(\cdot),$ 待排序数组长度 $n.$
+\Ensure 检验的结果.
+\State $\bm{a}_1 \gets$ 新生成的 $n$ 元待排序数组
+\State $\bm{a}_2 \gets \bm{a}_1$
+\State $\bm{b}_1 \gets \mathsf{Sort}(\bm{a}_1)$
+\State $\bm{b}_2 \gets \mathsf{Sort}^*(\bm{a}_2`)$
+\For{$i \gets 1 \hdots n$}
+    \If{$\bm{b}_1[i] \neq \bm{b}_2[i]$}
+       \State \Return 检验失败
+    \EndIf
+\EndFor
+\State \Return 检验通过
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{输入生成}
+
+本次实验要求测量算法在不同特征输入下的性能情况, 包括随机分布输入与几乎有序输入. 在给定任意确定性均匀分布随机数生成算法 $\mathsf{Rand}$ 的情况下, 我们能够使用算法 \ref{algo_gen_rand} 产生所需长度的随机数组.
+
+\begin{algorithm}
+\caption{生成给定长度的随机分布输入数组.}
+\label{algo_gen_rand}
+\begin{algorithmic}[1]
+\Require 确定性均匀分布随机数发生算法 $\mathsf{Rand},$ 期望输入长度 $n.$
+\Ensure 新生成的 $n$ 元随机数组.
+\State 初始化 $\mathsf{Rand}$
+\State $\bm{a} \gets []$
+\For{$i \gets 1 \hdots n$}
+    \State $\bm{a}[i] \gets$ 使用 $\mathsf{Rand}$ 生成的下一个随机数
+\EndFor
+\State \Return $\bm{a}$
+\end{algorithmic}
+\end{algorithm}
+
+实验中, 我们采用梅森旋转算法 \cite{bib_mersenne_randgen} 产生均匀且具有极长周期的随机 32 位整数.
+
+在获取了一个均匀的随机数组后, 我们可以借助参考排序算法 $\mathsf{Sort}^*(\cdot)$ 得到一个有序的相同维数的数组. 在该数组基础上对少量元素进行随机互换, 即可得到符合 "几乎有序" 条件的输入数组. 该两步过程由算法 \ref{algo_gen_rising} 和 \ref{algo_gen_almost_rising} 描述.
+
+\begin{algorithm}
+\caption{生成给定长度的有序输入数组.}
+\label{algo_gen_rising}
+\begin{algorithmic}[1]
+\Require 均匀随机数组 $\bm{a},$ 参考排序算法 $\mathsf{Sort}^*(\cdot).$
+\Ensure 新生成的有序数组.
+\State $\bm{b} \gets \mathsf{Sort}^*(\bm{a})$
+\State \Return $\bm{b}$
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+\caption{生成给定长度的几乎有序输入数组.}
+\label{algo_gen_almost_rising}
+\begin{algorithmic}[1]
+\Require 确定性均匀分布随机数发生算法 $\mathsf{Rand},$ 有序数组 $\bm{a},$ 交换元素对数 $p,$ 映射 $f: \mathrm{R}(\mathsf{Rand}) \to [1 \dots n].$
+\Ensure 新生成的几乎有序数组.
+\State 初始化 $\mathsf{Rand}$
+\State $\bm{b} \gets \bm{a}$
+\For{$i \gets 1 \hdots p$}
+    \State $l \gets f(\text{使用}\ \mathsf{Rand}\ \text{生成的下一个随机数})$
+    \State $h \gets f(\text{使用}\ \mathsf{Rand}\ \text{生成的下一个随机数})$
+    \State 交换 $\bm{b}[l]$ 与 $\bm{b}[h]$
+\EndFor
+\State \Return $\bm{b}$
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{性能测量}
+
+在操作系统无关的层面上, C 语言并没有为监视程序的运行提供便利的接口. 若仅仅使用每个排序算法在给定输入下的总运行时间作为性能的唯一判据, 虽然在理论上是相当可靠的, 但是鉴于部分排序算法在输入规模扩大时不具备在可接受时间内完成计算的可能, 我们必须寻找另一种能够在算法运行中实现提前停止的机制.
+
+线程和进程是在运行期开启新控制流并对其进行监视的较好方法, 但是 C 语言的线程标准库并未得到广泛的支持 \cite{bib_msvc_threads}, 因此我们放弃了该方案, 转而寻求侵入式的性能测量方案. 由于元素之间的比较次数是排序算法重要的性能指标, 我们以统计元素比较次数的方式实现第二种性能统计方式. 同时, 当元素比较次数超过一预设阈值时, 我们便使被监视排序算法提前终止并报告错误, 以实现时间效益上的提升.
+
+\section{结果分析}
+
+每种算法均在随机分布, 有序和几乎有序三种输入分布和 1e3, 1e4, 1e5, 1e6 和 1e7 的输入规模下进行三轮测试, 取耗时和比较次数的平均值为最终结果.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{cccccc}
+        \toprule
+        &100&1000&10000&100000&1000000 \\
+        \midrule
+        std::qsort&0&0&0&0&0 \\
+        std::qsort&0&0&0&0&0 \\
+        std::qsort&0&0&0&0&0 \\
+        \bottomrule
+    \end{tabular}
+\caption{表格1}
+\end{table}
+
+\section{小结}
+
+我是个列表
+
+\begin{itemize}
+\item 列表项1
+\item 列表项2
+\item 列表项3
+\end{itemize}
+
+我是个表格
+
+
+\begin{thebibliography}{}
+
+\bibitem{bib_msvc_threads} C11 Threads in Visual Studio 2022 version 17.8 Preview 2 \textbf{[OL]}. https://devblogs.microsoft.com/cppblog/c11-threads-in-visual-studio-2022-version-17-8-preview-2/
+\bibitem{bib_mersenne_randgen} Matsumoto, M.; Nishimura, T. Dynamic creation of pseudorandom number generators \textbf{[J]}. \textit{Monte Carlo and Quasi-Monte Carlo Methods 2000,} 1998: 56–69.
+
+\end{thebibliography}
+
+\appendix
+
+\section{附录: 排序算法的 C 语言实现}
+
+在本附录中, 我们列出本文所研究的排序算法的完整 C 语言实现. 本附录中的所有函数都具有如下所示的函数原型:
+\begin{lstlisting}[language=C]
+typedef enum algo_errno_ {
+    OK,
+    INTERNAL_ERR,
+    TIMED_OUT,
+} algo_errno_t;
+
+typedef int (*comp_t)(const void *, const void *);
+typedef algo_errno_t (*algo_t)(void *, size_t, size_t, comp_t, uint64_t, uint64_t *);
+\end{lstlisting}
+
+\subsection{冒泡排序}
+
+\begin{lstlisting}[language=C]
+algo_errno_t bubblesort(void *arr, size_t count, size_t size, comp_t comp, uint64_t threshold, uint64_t *out_counter) {
+    uint8_t *arr_ = arr;
+
+    for (size_t i = 0; i < count; i++) {
+        for (size_t j = 0; j < count - i - 1; j++) {
+            COUNTER_INC_AND_CHECK(*out_counter, threshold);
+            if (comp(arr_ + j * size, arr_ + (j + 1) * size) > 0) {
+                swap_bytes(arr_ + j * size, arr_ + (j + 1) * size, size);
+            }
+        }
+    }
+
+    return OK;
+}
+\end{lstlisting}
+
+\subsection{直接插入排序}
+
+\begin{lstlisting}[language=C]
+static int comp_proxy(comp_t comp, const void *a, const void *b, uint64_t *counter) {
+    (*counter)++;
+    return comp(a, b);
+}
+
+algo_errno_t insertion_sort(void *arr, size_t count, size_t size, comp_t comp, uint64_t threshold, uint64_t *out_counter) {
+    uint8_t *arr_ = arr;
+
+    for (size_t i = 1; i < count; i++) {
+        size_t j = i;
+        while (j > 0 && comp_proxy(comp, arr_ + j * size, arr_ + (j - 1) * size, out_counter) < 0) {
+            COUNTER_CHECK(*out_counter, threshold);
+            swap_bytes(arr_ + j * size, arr_ + (j - 1) * size, size);
+            j--;
+        }
+    }
+
+    return OK;
+}
+\end{lstlisting}
+
+\subsection{直接选择排序}
+
+\begin{lstlisting}[language=C]
+algo_errno_t selection_sort(void *arr, size_t count, size_t size, comp_t comp, uint64_t threshold, uint64_t *out_counter) {
+    uint8_t *arr_ = arr;
+
+    for (size_t i = 0; i < count; i++) {
+        size_t min = i;
+        for (size_t j = i + 1; j < count; j++) {
+            COUNTER_INC_AND_CHECK(*out_counter, threshold);
+            if (comp(arr_ + j * size, arr_ + min * size) < 0) {
+                min = j;
+            }
+        }
+        swap_bytes(arr_ + i * size, arr_ + min * size, size);
+    }
+
+    return OK;
+}
+\end{lstlisting}
+
+\subsection{归并排序}
+
+\begin{lstlisting}[language=C]
+static algo_errno_t merge_sort_impl(void *arr, size_t count, size_t size, comp_t comp, uint64_t threshold, uint64_t *counter) {
+    if (count <= 1) {
+        return OK;
+    }
+
+    uint8_t *arr_ = arr;
+
+    size_t mid = count / 2;
+    ALGO_ERRNO_UNWRAP(merge_sort_impl(arr, mid, size, comp, threshold, counter));
+    ALGO_ERRNO_UNWRAP(merge_sort_impl((uint8_t *)arr + mid * size, count - mid, size, comp, threshold, counter));
+
+    uint8_t *tmp = (uint8_t *)malloc(count * size * sizeof(uint8_t));
+    PTR_ASSERT_NONNULL(tmp);
+
+    size_t i = 0;
+    size_t j = mid;
+    size_t k = 0;
+    while (i < mid && j < count) {
+        COUNTER_INC_AND_CHECK_FREE(*counter, threshold, tmp);
+        if (comp(arr_ + i * size, arr_ + j * size) <= 0) {
+            memcpy_s(tmp + (k++) * size, size, arr_ + (i++) * size, size);
+        } else {
+            memcpy_s(tmp + (k++) * size, size, arr_ + (j++) * size, size);
+        }
+    }
+
+    while (i < mid) {
+        memcpy_s(tmp + (k++) * size, size, arr_ + (i++) * size, size);
+    }
+    while (j < count) {
+        memcpy_s(tmp + (k++) * size, size, arr_ + (j++) * size, size);
+    }
+
+    memcpy_s(arr_, count * size, tmp, count * size);
+    free(tmp);
+
+    return OK;
+}
+
+algo_errno_t merge_sort(void *arr, size_t count, size_t size, comp_t comp, uint64_t threshold, uint64_t *out_counter) {
+    return merge_sort_impl(arr, count, size, comp, threshold, out_counter);
+}
+\end{lstlisting}
+
+\subsection{以最末位元素为主元的快速排序}
+
+\begin{lstlisting}[language=C]
+static algo_errno_t partition_highpivot(void *arr, size_t size, size_t low, size_t high, comp_t comp, uint64_t threshold, uint64_t *counter, size_t *out_result) {
+    uint8_t *arr_ = arr;
+
+    uint8_t *pivot = arr_ + high * size;
+    size_t i = low - 1;
+
+    for (size_t j = low; j <= high; j++) {
+        COUNTER_INC_AND_CHECK(*counter, threshold);
+        if (comp(arr_ + j * size, pivot) < 0) {
+            i++;
+            swap_bytes(arr_ + i * size, arr_ + j * size, size);
+        }
+    }
+    swap_bytes(arr_ + (i + 1) * size, arr_ + high * size, size);
+    *out_result = i + 1;
+
+    return OK;
+}
+
+static algo_errno_t quicksort_highpivot_impl(void *arr, size_t size, size_t low, size_t high, comp_t comp, uint64_t threshold, uint64_t *counter) {
+    size_t *stack = (size_t *)malloc(sizeof(size_t) * (high - low + 1));
+    if (stack == NULL) {
+        return INTERNAL_ERR;
+    }
+
+    int64_t top = -1;
+
+    stack[++top] = low;
+    stack[++top] = high;
+
+    while (top >= 0) {
+        high = stack[top--];
+        low = stack[top--];
+
+        size_t p;
+        ALGO_ERRNO_UNWRAP_FREE(partition_highpivot(arr, size, low, high, comp, threshold, counter, &p), stack);
+
+        if (!((p - 1 - low) & (1ull << (sizeof(size_t) * 8 - 1)))) {
+            stack[++top] = low;
+            stack[++top] = p - 1;
+        }
+
+        if ((p + 1 - high) & (1ull << (sizeof(size_t) * 8 - 1))) {
+            stack[++top] = p + 1;
+            stack[++top] = high;
+        }
+    }
+
+    free(stack);
+
+    return OK;
+}
+
+algo_errno_t quicksort_highpivot(void *arr, size_t count, size_t size, comp_t comp, uint64_t threshold, uint64_t *out_counter) {
+    if (count <= 1) {
+        return OK;
+    }
+
+    return quicksort_highpivot_impl(arr, size, 0, count - 1, comp, threshold, out_counter);
+}
+\end{lstlisting}
+
+\subsection{由 \texttt{stdlib.h} 提供的 \texttt{qsort}}
+
+\begin{lstlisting}[language=C]
+algo_errno_t stdlib_qsort(void *arr, size_t count, size_t size, comp_t comp, uint64_t threshold, uint64_t *out_counter) {
+    qsort(arr, count, size, comp);
+
+    return OK;
+}
+\end{lstlisting}
+
+\subsection{基于 QuickPerm 的确定性猴子排序}
+
+\begin{lstlisting}[language=C]
+algo_errno_t bogosort_determ(void *arr, size_t count, size_t size, comp_t comp, uint64_t threshold, uint64_t *out_counter) {
+    uint8_t *arr_ = arr;
+
+    *out_counter = 0;
+
+    size_t *aux = (size_t *)malloc((count + 1) * sizeof(size_t));
+    PTR_ASSERT_NONNULL(aux);
+
+    for (size_t i = 0; i < count + 1; i++) {
+        aux[i] = i;
+    }
+
+    size_t i = 1;
+    while (i < count) {
+        bool is_same = true;
+        for (size_t k = 0; k < count - 1; k++) {
+            COUNTER_INC_AND_CHECK_FREE(*out_counter, threshold, aux);
+            if (comp(arr_ + k * size, arr_ + (k + 1) * size) > 0) {
+                is_same = false;
+                break;
+            }
+        }
+        if (is_same) {
+            break;
+        }
+
+        size_t j = 0;
+        aux[i]--;
+        if (i % 2 == 1) {
+            j = aux[i];
+        }
+        swap_bytes(arr_ + i * size, arr_ + j * size, size);
+
+        i = 1;
+        while (aux[i] == 0) {
+            aux[i] = i;
+            i++;
+        }
+    }
+
+    free(aux);
+
+    return OK;
+}
+\end{lstlisting}
+
+\section{附录: 测试驱动程序}
+
+在本附录中, 我们给出得到实验结果时所使用的测试驱动程序. 该程序向 \texttt{stdout} 输出 CSV 格式的机器可读结果信息, 同时向 \texttt{stderr} 输出人可读的进度与结果信息.
+
+\begin{lstlisting}[language=C]
+#include "pch.h"
+#include "mtwister.h"
+#include "../algo/algo.h"
+
+#define CONST_CHECK_N_ELEMS 10
+#define CONST_BENCH_N_ROUNDS 3
+#define CONST_ALMOST_ORDERED_N_SWAPS 16
+#define CONST_CHECK_SHIFT_DIST 2
+#define CONST_BENCH_SHIFT_DIST 2
+
+#define COLOR_ANSI_RED "\033[1;31m"
+#define COLOR_ANSI_GREEN "\033[1;32m"
+#define COLOR_ANSI_YELLOW "\033[1;33m"
+#define COLOR_ANSI_CYAN "\033[1;36m"
+#define COLOR_ANSI_WHITE "\033[1;37m"
+#define COLOR_ANSI_RESET "\033[1;0m"
+
+#define ARR_LEN_STATIC(a_) (sizeof(a_) / sizeof((a_)[0]))
+
+#define EXPECT(e_, a_) do { if (!((e_) == (a_))) { fprintf(stderr, COLOR_ANSI_RED "[!]" COLOR_ANSI_RESET " " __FUNCTION__ "():%d: Assertion (" #a_ " == " #e_ ") failed", __LINE__); abort(); } } while (0)
+#define EXPECT_NOT(e_, a_) do { if (!((e_) != (a_))) { fprintf(stderr, COLOR_ANSI_RED "[!]" COLOR_ANSI_RESET " " __FUNCTION__ "():%d: Assertion (" #a_ " != " #e_ ") failed", __LINE__); abort(); } } while (0)
+#define PRINT_INFO(fmt_, ...) do { fprintf(stderr, COLOR_ANSI_CYAN "[*]" COLOR_ANSI_RESET " " __FUNCTION__ "():%d: " fmt_, __LINE__, ##__VA_ARGS__); } while (0)
+#define PRINT_GOOD(fmt_, ...) do { fprintf(stderr, COLOR_ANSI_GREEN "[+]" COLOR_ANSI_RESET " " __FUNCTION__ "():%d: " fmt_, __LINE__, ##__VA_ARGS__); } while (0)
+#define PRINT_BAD(fmt_, ...) do { fprintf(stderr, COLOR_ANSI_YELLOW "[-]" COLOR_ANSI_RESET " " __FUNCTION__ "():%d: " fmt_, __LINE__, ##__VA_ARGS__); } while (0)
+
+typedef struct timespec timespec_t;
+
+typedef struct bench_result_ {
+    algo_errno_t retval;
+    timespec_t diff;
+    uint64_t comp_count;
+} bench_result_t;
+
+static int cmp_uint32(const void *a, const void *b) {
+    const uint32_t a_ = *(const uint32_t *)a;
+    const uint32_t b_ = *(const uint32_t *)b;
+
+    return (a_ > b_) - (a_ < b_);
+}
+
+typedef void (*gen_data_t)(MTRand_t *restrict, size_t, uint32_t *restrict);
+
+static void gen_rand_data(MTRand_t *restrict rng, size_t n_elem, uint32_t *restrict out_arr) {
+    for (size_t i = 0; i < n_elem; i++) {
+        out_arr[i] = mt_gen_rand_long(rng);
+    }
+}
+
+static void gen_rising_data(MTRand_t *restrict rng, size_t n_elem, uint32_t *restrict out_arr) {
+    gen_rand_data(rng, n_elem, out_arr);
+    qsort(out_arr, n_elem, sizeof(uint32_t), cmp_uint32);
+}
+
+static void gen_almost_rising_data(MTRand_t *restrict rng, size_t n_elem, uint32_t *restrict out_arr) {
+    gen_rising_data(rng, n_elem, out_arr);
+
+    for (int i = 0; i < CONST_ALMOST_ORDERED_N_SWAPS; i++) {
+        size_t low = (size_t)(mt_gen_rand(rng) * (double)n_elem);
+        size_t high = (size_t)(mt_gen_rand(rng) * (double)n_elem);
+        uint32_t tmp = out_arr[low];
+        out_arr[low] = out_arr[high];
+        out_arr[high] = tmp;
+    }
+}
+
+/*
+ * Calculate time difference.
+ * Adapted from https://www.gnu.org/software/libc/manual/html_node/Calculating-Elapsed-Time.html.
+ */
+static int timespec_subtract(timespec_t *x, timespec_t *y, timespec_t *result) {
+    /* Perform the carry for the later subtraction by updating y. */
+    if (x->tv_nsec < y->tv_nsec) {
+        int nsec = (y->tv_nsec - x->tv_nsec) / 1000000000 + 1;
+        y->tv_nsec -= 1000000000 * nsec;
+        y->tv_sec += nsec;
+    }
+    if (x->tv_nsec - y->tv_nsec > 100000000) {
+        int nsec = (x->tv_nsec - y->tv_nsec) / 100000000;
+        y->tv_nsec += 100000000 * nsec;
+        y->tv_sec -= nsec;
+    }
+
+    /* Compute the time remaining to wait.
+       tv_usec is certainly positive. */
+    result->tv_sec = x->tv_sec - y->tv_sec;
+    result->tv_nsec = x->tv_nsec - y->tv_nsec;
+
+    /* Return 1 if result is negative. */
+    return x->tv_sec < y->tv_sec;
+}
+
+static void check(MTRand_t *restrict rng, const named_algo_t *restrict al, size_t n_elem, comp_t cmp, uint64_t threshold, gen_data_t generator) {
+    const algo_t sorter = al->algo;
+    const char *sorter_name = al->name;
+
+    uint32_t *arr_1 = (uint32_t *)malloc(sizeof(uint32_t) * n_elem);
+    EXPECT_NOT(NULL, arr_1);
+    uint32_t *arr_2 = (uint32_t *)malloc(sizeof(uint32_t) * n_elem);
+    EXPECT_NOT(NULL, arr_2);
+
+    generator(rng, n_elem, arr_1);
+    memcpy_s(arr_2, sizeof(uint32_t) * n_elem, arr_1, sizeof(uint32_t) * n_elem);
+
+    uint64_t cmp_counter = 0;
+    algo_errno_t result = sorter(arr_1, n_elem, sizeof(uint32_t), cmp, threshold, &cmp_counter);
+    EXPECT(OK, result);
+    qsort(arr_2, n_elem, sizeof(uint32_t), cmp);
+
+    for (size_t i = 0; i < n_elem; i++) {
+        EXPECT(arr_2[i], arr_1[i]);
+    }
+
+    PRINT_GOOD("algo \"%s\": produces identical result as stdlib qsort\n", sorter_name);
+
+    free(arr_1);
+    free(arr_2);
+}
+
+static void bench_n_rounds(MTRand_t *restrict rng, const algo_t sorter, size_t n_elem, comp_t cmp, uint64_t threshold, size_t n_rounds, gen_data_t generator, bench_result_t *restrict out_result) {
+    uint32_t *nums = (uint32_t *)malloc(sizeof(uint32_t) * n_elem);
+    EXPECT_NOT(NULL, nums);
+
+    for (size_t i = 0; i < n_rounds; i++) {
+        generator(rng, n_elem, nums);
+
+        uint64_t cmp_counter = 0;
+
+        timespec_t ts_1;
+        EXPECT_NOT(0, timespec_get(&ts_1, TIME_UTC));
+        algo_errno_t result = sorter(nums, n_elem, sizeof(uint32_t), cmp, threshold, &cmp_counter);
+        timespec_t ts_2;
+        EXPECT_NOT(0, timespec_get(&ts_2, TIME_UTC));
+
+        out_result[i].retval = result;
+        out_result[i].comp_count = cmp_counter;
+        timespec_subtract(&ts_2, &ts_1, &out_result[i].diff);
+    }
+
+    free(nums);
+}
+
+static void bench_rand(MTRand_t *restrict rng, const named_algo_t *restrict al, size_t n_elem, comp_t cmp, uint64_t threshold) {
+    const algo_t sorter = al->algo;
+    const char *sorter_name = al->name;
+
+    bench_result_t result[CONST_BENCH_N_ROUNDS];
+    bench_n_rounds(rng, sorter, n_elem, cmp, threshold, CONST_BENCH_N_ROUNDS, gen_rand_data, result);
+
+    for (int i = 0; i < CONST_BENCH_N_ROUNDS; i++) {
+        bench_result_t cur = result[i];
+        if (cur.retval == OK) {
+            PRINT_GOOD("algo \"%s\": random - round %" PRId32 ": done - %" PRIu64 " comps - %" PRIdMAX ".%09" PRId32 " sec\n", sorter_name, i + 1, cur.comp_count, (intmax_t)cur.diff.tv_sec, cur.diff.tv_nsec);
+        } else {
+            PRINT_BAD("algo \"%s\": random - round %" PRId32 ": error - %" PRIu64 " comps - %" PRIdMAX ".%09" PRId32 " sec\n", sorter_name, i + 1, cur.comp_count, (intmax_t)cur.diff.tv_sec, cur.diff.tv_nsec);
+        }
+        printf("%s,random,%" PRId32 ",%" PRId32 ",%" PRIu64 ",%" PRIdMAX ".%09" PRId32 "\n", sorter_name, cur.retval, i + 1, cur.comp_count, (intmax_t)cur.diff.tv_sec, cur.diff.tv_nsec);
+    }
+}
+
+static void bench_rising(MTRand_t *restrict rng, const named_algo_t *restrict al, size_t n_elem, comp_t cmp, uint64_t threshold) {
+    const algo_t sorter = al->algo;
+    const char *sorter_name = al->name;
+
+    bench_result_t result[CONST_BENCH_N_ROUNDS];
+    bench_n_rounds(rng, sorter, n_elem, cmp, threshold, CONST_BENCH_N_ROUNDS, gen_rising_data, result);
+
+    for (int i = 0; i < CONST_BENCH_N_ROUNDS; i++) {
+        bench_result_t cur = result[i];
+        if (cur.retval == OK) {
+            PRINT_GOOD("algo \"%s\": rising - round %" PRId32 ": done - %" PRIu64 " comps - %" PRIdMAX ".%09" PRId32 " sec\n", sorter_name, i + 1, cur.comp_count, (intmax_t)cur.diff.tv_sec, cur.diff.tv_nsec);
+        } else {
+            PRINT_BAD("algo \"%s\": rising - round %" PRId32 ": error - %" PRIu64 " comps - %" PRIdMAX ".%09" PRId32 " sec\n", sorter_name, i + 1, cur.comp_count, (intmax_t)cur.diff.tv_sec, cur.diff.tv_nsec);
+        }
+        printf("%s,rising,%" PRId32 ",%" PRId32 ",%" PRIu64 ",%" PRIdMAX ".%09" PRId32 "\n", sorter_name, cur.retval, i + 1, cur.comp_count, (intmax_t)cur.diff.tv_sec, cur.diff.tv_nsec);
+    }
+}
+
+static void bench_almost_rising(MTRand_t *restrict rng, const named_algo_t *restrict al, size_t n_elem, comp_t cmp, uint64_t threshold) {
+    const algo_t sorter = al->algo;
+    const char *sorter_name = al->name;
+
+    bench_result_t result[CONST_BENCH_N_ROUNDS];
+    bench_n_rounds(rng, sorter, n_elem, cmp, threshold, CONST_BENCH_N_ROUNDS, gen_almost_rising_data, result);
+
+    for (int i = 0; i < CONST_BENCH_N_ROUNDS; i++) {
+        bench_result_t cur = result[i];
+        if (cur.retval == OK) {
+            PRINT_GOOD("algo \"%s\": almost rising - round %" PRId32 ": done - %" PRIu64 " comps - %" PRIdMAX ".%09" PRId32 " sec\n", sorter_name, i + 1, cur.comp_count, (intmax_t)cur.diff.tv_sec, cur.diff.tv_nsec);
+        } else {
+            PRINT_BAD("algo \"%s\": almost rising - round %" PRId32 ": error - %" PRIu64 " comps - %" PRIdMAX ".%09" PRId32 " sec\n", sorter_name, i + 1, cur.comp_count, (intmax_t)cur.diff.tv_sec, cur.diff.tv_nsec);
+        }
+        printf("%s,almost rising,%" PRId32 ",%" PRId32 ",%" PRIu64 ",%" PRIdMAX ".%09" PRId32 "\n", sorter_name, cur.retval, i + 1, cur.comp_count, (intmax_t)cur.diff.tv_sec, cur.diff.tv_nsec);
+    }
+}
+
+static const uint64_t BENCH_ARR_SCALES[] = {1000, 10000, 100000, 1000000, 10000000};
+
+int main(void) {
+    MTRand_t rng;
+
+    mt_seed_rand(&rng, (unsigned long)time(NULL));
+
+    printf("algo name,input dist,retval,round no,n comps,time sec\n");
+
+    PRINT_INFO("Checking correctness of algorithms\n");
+    for (const named_algo_t *al = ALGOS; al->algo != NULL; al++) {
+        check(&rng, al, 10, cmp_uint32, (uint64_t)(UINT32_MAX >> CONST_CHECK_SHIFT_DIST), gen_rand_data);
+    }
+
+    for (size_t i = 0; i < ARR_LEN_STATIC(BENCH_ARR_SCALES); i++) {
+        uint64_t scale = BENCH_ARR_SCALES[i];
+
+        PRINT_INFO("Running benchmarks on scale %" PRIu64 "\n", scale);
+        for (const named_algo_t *al = ALGOS; al->algo != NULL; al++) {
+            bench_rand(&rng, al, scale, cmp_uint32, (uint64_t)(UINT32_MAX >> CONST_BENCH_SHIFT_DIST));
+            bench_rising(&rng, al, scale, cmp_uint32, (uint64_t)(UINT32_MAX >> CONST_BENCH_SHIFT_DIST));
+            bench_almost_rising(&rng, al, scale, cmp_uint32, (uint64_t)(UINT32_MAX >> CONST_BENCH_SHIFT_DIST));
+        }
+    }
+
+    return 0;
+}
+\end{lstlisting}
+
+\section{附录: 源代码可见性}
+
+本报告中使用的 C 语言源代码可于 \url{https://github.com/CSharperMantle/sort_algos_perf} 处获得, 并在 BSD 3-Clause 许可证的条件与条款下使用. 关于授权协议的具体信息请见上述 URL.
+
+\end{document}

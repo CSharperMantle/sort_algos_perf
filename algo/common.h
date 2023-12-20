@@ -21,5 +21,6 @@ void swap_bytes(void *restrict a, void *restrict b, size_t size);
 #define COUNTER_INC_AND_CHECK(c_, t_) do { (c_)++; if ((c_) > (t_)) { return TIMED_OUT; } } while (0)
 #define COUNTER_INC_AND_CHECK_FREE(c_, t_, p_) do { (c_)++; if ((c_) > (t_)) { free(p_); return TIMED_OUT; } } while (0)
 #define ALGO_ERRNO_UNWRAP(exp_) do { algo_errno_t res_ = (exp_); if (res_ != OK) { return res_; } } while (0)
+#define ALGO_ERRNO_UNWRAP_FREE(exp_, p_) do { algo_errno_t res_ = (exp_); if (res_ != OK) { free(p_); return res_; } } while (0)
 
 #endif // COMMON_H_INCLUDED_

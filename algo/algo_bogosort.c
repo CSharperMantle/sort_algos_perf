@@ -16,16 +16,9 @@ algo_errno_t bogosort_determ(void *arr, size_t count, size_t size, comp_t comp, 
 
     size_t i = 1;
     while (i < count) {
-        size_t j = 0;
-        aux[i]--;
-        if (i % 2 == 1) {
-            j = aux[i];
-        }
-        swap_bytes(arr_ + i * size, arr_ + j * size, size);
-
         bool is_same = true;
         for (size_t k = 0; k < count - 1; k++) {
-            COUNTER_INC_AND_CHECK(*out_counter, threshold);
+            COUNTER_INC_AND_CHECK_FREE(*out_counter, threshold, aux);
             if (comp(arr_ + k * size, arr_ + (k + 1) * size) > 0) {
                 is_same = false;
                 break;
@@ -34,6 +27,13 @@ algo_errno_t bogosort_determ(void *arr, size_t count, size_t size, comp_t comp, 
         if (is_same) {
             break;
         }
+
+        size_t j = 0;
+        aux[i]--;
+        if (i % 2 == 1) {
+            j = aux[i];
+        }
+        swap_bytes(arr_ + i * size, arr_ + j * size, size);
 
         i = 1;
         while (aux[i] == 0) {

@@ -17,8 +17,8 @@ typedef struct MTRand_ {
     int index;
 } MTRand_t;
 
-void mt_seed_rand(MTRand_t *rand, unsigned long seed);
-unsigned long mt_gen_rand_long(MTRand_t *rand);
-double mt_gen_rand(MTRand_t *rand);
+void mt_seed_rand(MTRand_t *restrict rand, unsigned long seed);
+unsigned long mt_gen_rand_long(MTRand_t *restrict rand);
+double mt_gen_rand(MTRand_t *restrict rand);
 
 #endif // MTWISTER_H_

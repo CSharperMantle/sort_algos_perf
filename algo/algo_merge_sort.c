@@ -22,20 +22,20 @@ static algo_errno_t merge_sort_impl(void *arr, size_t count, size_t size, comp_t
     while (i < mid && j < count) {
         COUNTER_INC_AND_CHECK_FREE(*counter, threshold, tmp);
         if (comp(arr_ + i * size, arr_ + j * size) <= 0) {
-            memcpy(tmp + (k++) * size, arr_ + (i++) * size, size);
+            memcpy_s(tmp + (k++) * size, size, arr_ + (i++) * size, size);
         } else {
-            memcpy(tmp + (k++) * size, arr_ + (j++) * size, size);
+            memcpy_s(tmp + (k++) * size, size, arr_ + (j++) * size, size);
         }
     }
 
     while (i < mid) {
-        memcpy(tmp + (k++) * size, arr_ + (i++) * size, size);
+        memcpy_s(tmp + (k++) * size, size, arr_ + (i++) * size, size);
     }
     while (j < count) {
-        memcpy(tmp + (k++) * size, arr_ + (j++) * size, size);
+        memcpy_s(tmp + (k++) * size, size, arr_ + (j++) * size, size);
     }
 
-    memcpy(arr_, tmp, count * size);
+    memcpy_s(arr_, count * size, tmp, count * size);
     free(tmp);
 
     return OK;

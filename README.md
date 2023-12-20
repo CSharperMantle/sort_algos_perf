@@ -8,7 +8,7 @@ Compare the performance for various sorting algorithms, including:
 * Straight insertion sort
 * Straight selection sort
 * Merge sort
-* Quicksort with median pivot
+* Quicksort with high pivot location
 * `qsort` provided by `stdlib.h`
 * Deterministic Bogosort with QuickPerm
 

@@ -21,7 +21,7 @@
 #include "pch.h"
 #include "mtwister.h"
 
-inline static void m_seed_rand(MTRand_t *rand, unsigned long seed) {
+inline static void m_seed_rand(MTRand_t *restrict rand, unsigned long seed) {
     /*
      * set initial seeds to mt[STATE_VECTOR_LENGTH] using the generator
      * from Line 25 of Table 1 in: Donald Knuth, "The Art of Computer
@@ -36,14 +36,14 @@ inline static void m_seed_rand(MTRand_t *rand, unsigned long seed) {
 /*
  * Creates a new random number generator from a given seed.
  */
-void mt_seed_rand(MTRand_t *rand, unsigned long seed) {
+void mt_seed_rand(MTRand_t *restrict rand, unsigned long seed) {
     m_seed_rand(rand, seed);
 }
 
 /*
  * Generates a pseudo-randomly generated long.
  */
-unsigned long mt_gen_rand_long(MTRand_t *rand) {
+unsigned long mt_gen_rand_long(MTRand_t *restrict rand) {
     unsigned long y;
     static unsigned long mag[2] = {0x0, 0x9908b0df}; /* mag[x] = x * 0x9908b0df for x = 0,1 */
     if (rand->index >= STATE_VECTOR_LENGTH || rand->index < 0) {
@@ -75,6 +75,6 @@ unsigned long mt_gen_rand_long(MTRand_t *rand) {
 /*
  * Generates a pseudo-randomly generated double in the range [0..1].
  */
-double mt_gen_rand(MTRand_t *rand) {
+double mt_gen_rand(MTRand_t *restrict rand) {
     return((double)mt_gen_rand_long(rand) / (unsigned long)0xffffffff);
 }

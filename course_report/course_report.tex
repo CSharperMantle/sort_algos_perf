@@ -125,17 +125,163 @@
 
 \subsection{冒泡排序}
 
+算法 \ref{algo_bubblesort} 描述了冒泡排序算法. 该算法持续交换不满足给定关系的元素以达到排序效果.
+
+\begin{algorithm}
+\caption{冒泡排序.}
+\label{algo_bubblesort}
+\begin{algorithmic}[1]
+\Require 待排序数组 $\bm{a},$ 全序关系 $\preceq,$ 待排序数组长度 $n.$
+\Ensure 排序完成的数组.
+\For{$i \gets 1 \hdots n$}
+    \For{$j \gets 1 \hdots n - i$}
+        \If{$\bm{a}[j] \npreceq \bm{a}[j + 1]$}
+            \State $\mathsf{Swap}(\bm{a}[j], \bm{a}[j + 1])$
+        \EndIf
+    \EndFor
+\EndFor
+\State \Return $\bm{a}$
+\end{algorithmic}
+\end{algorithm}
+
 \subsection{直接插入排序}
+
+算法 \ref{algo_straight_insertion} 描述了直接插入排序. 该算法通过将各元素插入至已排序区间中的正确位置从而实现排序.
+
+\begin{algorithm}
+\caption{直接插入排序.}
+\label{algo_straight_insertion}
+\begin{algorithmic}[1]
+\Require 待排序数组 $\bm{a},$ 全序关系 $\preceq,$ 待排序数组长度 $n.$
+\Ensure 排序完成的数组.
+\For{$i \gets 2 \hdots n$}
+    \State $p \gets \bm{a}[i]$
+    \State $j \gets i - 1$
+    \While{$j \ge 0 \land \bm{a}[j] \npreceq p$}
+        \State $\bm{a}[j + 1] \gets \bm{a}[j]$
+        \State $j \gets j - 1$
+    \EndWhile
+    \State $\bm{a}[j + 1] \gets p$
+\EndFor
+\State \Return $\bm{a}$
+\end{algorithmic}
+\end{algorithm}
 
 \subsection{直接选择排序}
 
+由算法 \ref{algo_straight_selection} 描述的直接选择排序的每一趟都选择未排序元素中给定序下的最小元素, 并将其放置于已排序元素区间的末尾.
+
+\begin{algorithm}
+\caption{直接选择排序.}
+\label{algo_straight_selection}
+\begin{algorithmic}[1]
+\Require 待排序数组 $\bm{a},$ 全序关系 $\preceq,$ 待排序数组长度 $n.$
+\Ensure 排序完成的数组.
+\For{$i \gets 1 \hdots n$}
+    \State $p \gets \mathsf{IndexMin}(\bm{a}[i+1 \dots n], \preceq)$
+    \State $\mathsf{Swap}(\bm{a}[p], \bm{a}[i])$
+\EndFor
+\State \Return $\bm{a}$
+\end{algorithmic}
+\end{algorithm}
+
 \subsection{归并排序}
+
+由算法 \ref{algo_merge} 描述的归并排序采用分治策略, 将每个有序子数组按序合并得到已排序的最终结果. 若将两个有序子数组记为 $\bm{s}_1$ 和 $\bm{s}_2,$ 对这两个数组的合并仅需要执行 $\min \left\{\textsf{Len}(\bm{s}_1), \textsf{Len}(\bm{s}_2)\right\} - 1$ 次比较.
+
+\begin{algorithm}
+\caption{归并排序.}
+\label{algo_merge}
+\begin{algorithmic}[1]
+\Require 待排序数组 $\bm{a},$ 全序关系 $\preceq,$ 待排序数组长度 $n.$
+\Ensure 排序完成的数组.
+\If{$\mathsf{Len}(\bm{a}) = 1$}
+    \State \Return $\bm{a}$
+\EndIf
+\State $p \gets \mathsf{Len}(\bm{a}) / 2$
+\State $\bm{l} \gets$ 以 $\bm{a}[1 \dots p]$ 为参数递归调用自身
+\State $\bm{h} \gets$ 以 $\bm{a}[p+1 \dots n]$ 为参数递归调用自身
+\State $\bm{a} \gets \mathsf{MergeOrdered}(\bm{l}, \bm{h})$
+\State \Return $\bm{a}$
+\end{algorithmic}
+\end{algorithm}
 
 \subsection{以最末位元素为主元的快速排序}
 
+由算法 \ref{algo_quicksort_highpivot} 描述的快速排序算法同样使用了分治的思想. 给定待排序数组 $\bm{a},$ 该算法选取一主元 $p,$ 确定其在排序后数组中的正确位置, 同时将剩余元素分成两个集合 $\mathbb{S}_l$ 和 $\mathbb{S}_h,$ 满足:
+\begin{equation}
+  \left\{
+    \begin{aligned}
+        \mathbb{S}_l & = \left\{x \in \bm{a}\ \vert\ x \preceq p \right\} \\
+        \mathbb{S}_h & = \left\{x \in \bm{a}\ \vert\ x \npreceq p \right\}
+    \end{aligned}
+  \right.
+\end{equation}
+
+之后, 再在$\mathbb{S}_l$ 和 $\mathbb{S}_h$ 上分别递归调用自身, 直到输入数组中没有元素或只有一个主元.
+
+算法 \ref{algo_quicksort_highpivot} 中采用的主元选取策略是取数组最末元素为主元. 其他策略也是可行的.
+
+\begin{algorithm}
+\caption{末主元快速排序.}
+\label{algo_quicksort_highpivot}
+\begin{algorithmic}[1]
+\Require 待排序数组 $\bm{a},$ 全序关系 $\preceq,$ 待排序数组长度 $n.$
+\Ensure 排序完成的数组.
+\If{$\mathsf{Len}(\bm{a}) = 1$}
+    \State \Return $\bm{a}$
+\EndIf
+\State $p \gets \bm{a}[n]$
+\State $i \gets 1$
+\For{$j \gets 1 \dots n$}
+    \If{$\bm{a}[j] \preceq p$}
+        \State $\mathsf{Swap}(\bm{a}[i], \bm{a}[j])$
+        \State $i \gets i + 1$
+    \EndIf
+\EndFor
+\State $\mathsf{Swap}(\bm{a}[i], \bm{a}[n])$
+\State $\bm{l} \gets$ 以 $\bm{a}[1 \dots i-1]$ 为参数递归调用自身
+\State $\bm{h} \gets$ 以 $\bm{a}[i+1 \dots n]$ 为参数递归调用自身
+\State $\bm{a} \gets \mathsf{Concat}(\bm{l}, [p], \bm{h})$
+\State \Return $\bm{a}$
+\end{algorithmic}
+\end{algorithm}
+
 \subsection{由 \texttt{stdlib.h} 提供的 \texttt{qsort}}
 
+该算法通过调用 \texttt{stdlib.h} 提供的 \texttt{qsort} 函数实现. C 语言标准中并未指定该函数所使用的算法, 同时也未对其性能作任何保证. 因此, 在本次实验中, 我们仅仅假定该函数已被正确实现, 其包装如算法 \ref{algo_stdlib_qsort} 所示.
+
+\begin{algorithm}
+\caption{由 \texttt{stdlib.h} 提供的 \texttt{qsort} 排序.}
+\label{algo_stdlib_qsort}
+\begin{algorithmic}[1]
+\Require 待排序数组 $\bm{a},$ 全序关系 $\preceq,$ 待排序数组长度 $n.$
+\Ensure 排序完成的数组.
+\State $\bm{a} \gets \mathtt{qsort}(\bm{a}, \preceq, n)$
+\State \Return $\bm{a}$
+\end{algorithmic}
+\end{algorithm}
+
 \subsection{基于 QuickPerm 的确定性 Bogosort}
+
+由算法 \ref{algo_bogosort_determ} 描述的确定性 Bogosort 作为低效率排序算法的典型进入本次实验的讨论范围. 该算法通过持续对输入数组求取下一个全排列的方法寻找一个满足给定序关系的排列. 原始的 Bogosort 使用一 Las Vegas 型随机算法生成全排列, 具有运行时间难以确定的劣势. 因此, 我们采用 QuickPerm\cite{bib_quickperm} 这一确定性算法实现排列的求取. 我们可以由此得出推论, 该算法是一必然能够终止的确定性算法.
+
+\begin{algorithm}
+\caption{确定性 Bogosort.}
+\label{algo_bogosort_determ}
+\begin{algorithmic}[1]
+\Require 待排序数组 $\bm{a},$ 全序关系 $\preceq,$ 待排序数组长度 $n.$
+\Ensure 排序完成的数组.
+\For{$\bm{p} \in \mathsf{QuickPerm}(\bm{a})$}
+    \For{$i \gets 2 \dots n$}
+        \If{$\bm{p}[i - 1] \npreceq \bm{p}[i]$}
+            \State 检验下一个排列 $\bm{p}$
+        \EndIf
+    \EndFor
+    \State \Return $\bm{p}$
+\EndFor
+\end{algorithmic}
+\end{algorithm}
 
 \section{实验设计}
 
@@ -149,14 +295,14 @@
 \caption{使用不完全归纳检验排序算法的正确性.}
 \label{algo_correctness}
 \begin{algorithmic}[1]
-\Require 待检测排序函数 $\mathsf{Sort}(\cdot),$ 参考排序函数 $\mathsf{Sort}^*(\cdot),$ 待排序数组长度 $n.$
+\Require 待检测排序函数 $\mathsf{Sort}(\cdot, \cdot),$ 参考排序函数 $\mathsf{Sort}^*(\cdot, \cdot),$ 待排序数组长度 $n,$ 全序关系 $\preceq.$
 \Ensure 检验的结果.
 \State $\bm{a}_1 \gets$ 新生成的 $n$ 元待排序数组
 \State $\bm{a}_2 \gets \bm{a}_1$
-\State $\bm{b}_1 \gets \mathsf{Sort}(\bm{a}_1)$
-\State $\bm{b}_2 \gets \mathsf{Sort}^*(\bm{a}_2`)$
+\State $\bm{a}_1 \gets \mathsf{Sort}(\bm{a}_1, \preceq)$
+\State $\bm{a}_2 \gets \mathsf{Sort}^*(\bm{a}_2, \preceq)$
 \For{$i \gets 1 \hdots n$}
-    \If{$\bm{b}_1[i] \neq \bm{b}_2[i]$}
+    \If{$\bm{a}_1[i] \neq \bm{a}_2[i]$}
        \State \Return 检验失败
     \EndIf
 \EndFor
@@ -191,10 +337,10 @@
 \caption{生成给定长度的有序输入数组.}
 \label{algo_gen_rising}
 \begin{algorithmic}[1]
-\Require 均匀随机数组 $\bm{a},$ 参考排序算法 $\mathsf{Sort}^*(\cdot).$
+\Require 均匀随机数组 $\bm{a},$ 参考排序算法 $\mathsf{Sort}^*(\cdot, \cdot),$ 全序关系 $\preceq.$
 \Ensure 新生成的有序数组.
-\State $\bm{b} \gets \mathsf{Sort}^*(\bm{a})$
-\State \Return $\bm{b}$
+\State $\bm{a} \gets \mathsf{Sort}^*(\bm{a}, \preceq)$
+\State \Return $\bm{a}$
 \end{algorithmic}
 \end{algorithm}
 
@@ -205,13 +351,12 @@
 \Require 确定性均匀分布随机数发生算法 $\mathsf{Rand},$ 有序数组 $\bm{a},$ 交换元素对数 $p,$ 映射 $f: \mathrm{R}(\mathsf{Rand}) \to [1 \dots n].$
 \Ensure 新生成的几乎有序数组.
 \State 初始化 $\mathsf{Rand}$
-\State $\bm{b} \gets \bm{a}$
 \For{$i \gets 1 \hdots p$}
     \State $l \gets f(\text{使用}\ \mathsf{Rand}\ \text{生成的下一个随机数})$
     \State $h \gets f(\text{使用}\ \mathsf{Rand}\ \text{生成的下一个随机数})$
-    \State 交换 $\bm{b}[l]$ 与 $\bm{b}[h]$
+    \State 交换 $\bm{a}[l]$ 与 $\bm{a}[h]$
 \EndFor
-\State \Return $\bm{b}$
+\State \Return $\bm{a}$
 \end{algorithmic}
 \end{algorithm}
 
@@ -288,9 +433,9 @@
 
 在两种输入分布下, 标准库 \texttt{qsort} 均能保持基线水准的性能表现. 这主要归因于 MSVC 平台使用 Introsort 算法实现该函数, 在快速排序基础上尝试降低其最坏情况下的比较次数. 与手动实现的快速排序相比较, 其在几乎有序输入上也能够具有较为理想的性能, 且运行时间相对于输入规模的变化趋势与输入分布相关性较弱.
 
-直接插入排序在随机序列上表现不佳, 其需要进行 $\mathcal{O}(n^2)$ 次比较操作. 但是在几乎有序序列上表现尚可, 因为其可以滑过大部分已排序子串而不进行交换和重复的比较. 该算法的最差情况出现于完全逆序输入, 此时其需要进行 $(n^2 - n) / 2$ 次比较.
+直接插入排序在随机序列上表现不佳, 其需要进行 $\mathcal{O}(n^2)$ 次比较操作. 但是在几乎有序序列上表现尚可, 因为其可以滑过大部分已排序区间而不进行交换和重复的比较. 该算法的最差情况出现于完全逆序输入, 此时其需要进行 $(n^2 - n) / 2$ 次比较.
 
-直接选择排序需要两两比较所有元素, 在每一趟中寻找未排序子串中给定序下的最小值. 因此, 无论输入分布如何, 均需要进行 $n^2$ 次比较操作.
+直接选择排序需要两两比较所有元素, 在每一趟中寻找未排序区间中给定序下的最小值. 因此, 无论输入分布如何, 均需要进行 $n^2$ 次比较操作.
 
 冒泡排序在每一趟中交换不满足序关系的相邻元素. 因此, 如果输入已完全有序, 则在第一趟中便无需进行任何交换, 仅需要 $n - 1$ 次比较即可确认排序完成. 但是在完全逆序输入下, 它需要对所有逆序对进行比较并交换, 次数为 $(p^2 - p) / 2,$ 其中 $p$ 为元素对数.
 
@@ -310,8 +455,9 @@
 
 \begin{thebibliography}{}
 
-\bibitem{bib_msvc_threads} C11 Threads in Visual Studio 2022 version 17.8 Preview 2 \textbf{[OL]}. https://devblogs.microsoft.com/cppblog/c11-threads-in-visual-studio-2022-version-17-8-preview-2/
+\bibitem{bib_quickperm} Permutation Algorithms Using Iteration and the Base-N-Odometer Model (Without Recursion) \textbf{[OL]}. https://www.quickperm.org/
 \bibitem{bib_mersenne_randgen} Matsumoto, M.; Nishimura, T. Dynamic creation of pseudorandom number generators \textbf{[J]}. \textit{Monte Carlo and Quasi-Monte Carlo Methods 2000,} 1998: 56–69.
+\bibitem{bib_msvc_threads} C11 Threads in Visual Studio 2022 version 17.8 Preview 2 \textbf{[OL]}. https://devblogs.microsoft.com/cppblog/c11-threads-in-visual-studio-2022-version-17-8-preview-2/
 
 \end{thebibliography}
 

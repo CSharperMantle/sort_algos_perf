@@ -379,6 +379,7 @@
 \begin{table}
 \centering
 \begin{threeparttable}
+    \caption{不同规模的随机分布输入下排序算法的平均耗时统计}
     \begin{tabular}{cccccc}
         \toprule
          & 1e3 & 1e4 & 1e5 & 1e6 & 1e7 \\
@@ -397,7 +398,6 @@
         \item 单位: 秒, 舍入到第 6 位小数.
         \item[*] 全部 3 次运行中比较次数均超过 $0\mathrm{x}40000000 = 1073741824$ 次的限制, 触发提前停止.
     \end{tablenotes}
-    \caption{不同规模的随机分布输入下排序算法的平均耗时统计.}
     \label{table_result_random}
 \end{threeparttable}
 \end{table}
@@ -405,6 +405,7 @@
 \begin{table}
 \centering
 \begin{threeparttable}
+    \caption{不同规模的几乎有序输入下排序算法的平均耗时统计}
     \begin{tabular}{cccccc}
         \toprule
          & 1e3 & 1e4 & 1e5 & 1e6 & 1e7 \\
@@ -424,7 +425,6 @@
         \item[*] 全部 3 次运行中比较次数均超过 $0\mathrm{x}40000000 = 1073741824$ 次的限制, 触发提前停止.
         \item[!] 3 次运行中部分趟比较次数超过 $0\mathrm{x}40000000 = 1073741824$ 次的限制, 触发提前停止.
     \end{tablenotes}
-    \caption{不同规模的几乎有序输入下排序算法的平均耗时统计.}
     \label{table_result_almost_rising}
 \end{threeparttable}
 \end{table}

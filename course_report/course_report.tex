@@ -127,7 +127,7 @@
 
 算法 \ref{algo_bubblesort} 描述了冒泡排序算法. 该算法持续交换不满足给定关系的元素以达到排序效果.
 
-\begin{algorithm}
+\begin{algorithm}[H]
 \caption{冒泡排序.}
 \label{algo_bubblesort}
 \begin{algorithmic}[1]
@@ -148,7 +148,7 @@
 
 算法 \ref{algo_straight_insertion} 描述了直接插入排序. 该算法通过将各元素插入至已排序区间中的正确位置从而实现排序.
 
-\begin{algorithm}
+\begin{algorithm}[H]
 \caption{直接插入排序.}
 \label{algo_straight_insertion}
 \begin{algorithmic}[1]
@@ -171,7 +171,7 @@
 
 由算法 \ref{algo_straight_selection} 描述的直接选择排序的每一趟都选择未排序元素中给定序下的最小元素, 并将其放置于已排序元素区间的末尾.
 
-\begin{algorithm}
+\begin{algorithm}[H]
 \caption{直接选择排序.}
 \label{algo_straight_selection}
 \begin{algorithmic}[1]
@@ -189,7 +189,7 @@
 
 由算法 \ref{algo_merge} 描述的归并排序采用分治策略, 将每个有序子数组按序合并得到已排序的最终结果. 若将两个有序子数组记为 $\bm{s}_1$ 和 $\bm{s}_2,$ 对这两个数组的合并仅需要执行 $\min \left\{\textsf{Len}(\bm{s}_1), \textsf{Len}(\bm{s}_2)\right\} - 1$ 次比较.
 
-\begin{algorithm}
+\begin{algorithm}[H]
 \caption{归并排序.}
 \label{algo_merge}
 \begin{algorithmic}[1]
@@ -209,7 +209,8 @@
 \subsection{以最末位元素为主元的快速排序}
 
 由算法 \ref{algo_quicksort_highpivot} 描述的快速排序算法同样使用了分治的思想. 给定待排序数组 $\bm{a},$ 该算法选取一主元 $p,$ 确定其在排序后数组中的正确位置, 同时将剩余元素分成两个集合 $\mathbb{S}_l$ 和 $\mathbb{S}_h,$ 满足:
-\begin{equation}
+
+\begin{equation}[H]
   \left\{
     \begin{aligned}
         \mathbb{S}_l & = \left\{x \in \bm{a}\ \vert\ x \preceq p \right\} \\
@@ -218,11 +219,11 @@
   \right.
 \end{equation}
 
-之后, 再在$\mathbb{S}_l$ 和 $\mathbb{S}_h$ 上分别递归调用自身, 直到输入数组中没有元素或只有一个主元.
+之后, 再在 $\mathbb{S}_l$ 和 $\mathbb{S}_h$ 上分别递归调用自身, 直到输入数组中没有元素或只有一个主元.
 
 算法 \ref{algo_quicksort_highpivot} 中采用的主元选取策略是取数组最末元素为主元. 其他策略也是可行的.
 
-\begin{algorithm}
+\begin{algorithm}[H]
 \caption{末主元快速排序.}
 \label{algo_quicksort_highpivot}
 \begin{algorithmic}[1]
@@ -251,7 +252,7 @@
 
 该算法通过调用 \texttt{stdlib.h} 提供的 \texttt{qsort} 函数实现. C 语言标准中并未指定该函数所使用的算法, 同时也未对其性能作任何保证. 因此, 在本次实验中, 我们仅仅假定该函数已被正确实现, 其包装如算法 \ref{algo_stdlib_qsort} 所示.
 
-\begin{algorithm}
+\begin{algorithm}[H]
 \caption{由 \texttt{stdlib.h} 提供的 \texttt{qsort} 排序.}
 \label{algo_stdlib_qsort}
 \begin{algorithmic}[1]
@@ -266,7 +267,7 @@
 
 由算法 \ref{algo_bogosort_determ} 描述的确定性 Bogosort 作为低效率排序算法的典型进入本次实验的讨论范围. 该算法通过持续对输入数组求取下一个全排列的方法寻找一个满足给定序关系的排列. 原始的 Bogosort 使用一 Las Vegas 型随机算法生成全排列, 具有运行时间难以确定的劣势. 因此, 我们采用 QuickPerm\cite{bib_quickperm} 这一确定性算法实现排列的求取. 我们可以由此得出推论, 该算法是一必然能够终止的确定性算法.
 
-\begin{algorithm}
+\begin{algorithm}[H]
 \caption{确定性 Bogosort.}
 \label{algo_bogosort_determ}
 \begin{algorithmic}[1]
@@ -291,7 +292,7 @@
 
 由于标准库提供了 \texttt{qsort} 函数作为参考实现, 我们可以对比自行实现排序算法的输出结果与标注库 \texttt{qsort} 的输出结果, 以对算法正确性进行不完全归纳证明. 这里, 我们设计算法 \ref{algo_correctness} 进行正确性检验.
 
-\begin{algorithm}
+\begin{algorithm}[H]
 \caption{使用不完全归纳检验排序算法的正确性.}
 \label{algo_correctness}
 \begin{algorithmic}[1]
@@ -314,7 +315,7 @@
 
 本次实验要求测量算法在不同特征输入下的性能情况, 包括随机分布输入与几乎有序输入. 在给定任意确定性均匀分布随机数生成算法 $\mathsf{Rand}$ 的情况下, 我们能够使用算法 \ref{algo_gen_rand} 产生所需长度的随机数组.
 
-\begin{algorithm}
+\begin{algorithm}[H]
 \caption{生成给定长度的随机分布输入数组.}
 \label{algo_gen_rand}
 \begin{algorithmic}[1]
@@ -333,7 +334,7 @@
 
 在获取了一个均匀的随机数组后, 我们可以借助参考排序算法 $\mathsf{Sort}^*(\cdot)$ 得到一个有序的相同维数的数组. 在该数组基础上对少量元素进行随机互换, 即可得到符合 "几乎有序" 条件的输入数组. 该两步过程由算法 \ref{algo_gen_rising} 和 \ref{algo_gen_almost_rising} 描述.
 
-\begin{algorithm}
+\begin{algorithm}[H]
 \caption{生成给定长度的有序输入数组.}
 \label{algo_gen_rising}
 \begin{algorithmic}[1]
@@ -343,7 +344,6 @@
 \State \Return $\bm{a}$
 \end{algorithmic}
 \end{algorithm}
-
 \begin{algorithm}
 \caption{生成给定长度的几乎有序输入数组.}
 \label{algo_gen_almost_rising}

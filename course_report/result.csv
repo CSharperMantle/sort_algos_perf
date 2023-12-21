@@ -1,0 +1,361 @@
+algo name,input dist,retval,n elem,round no,n comps,time sec
+bubblesort,random,0,1000,1,499500,0.001103800
+bubblesort,random,0,1000,2,499500,0.001092300
+bubblesort,random,0,1000,3,499500,0.001081200
+bubblesort,rising,0,1000,1,499500,0.000771600
+bubblesort,rising,0,1000,2,499500,0.000762600
+bubblesort,rising,0,1000,3,499500,0.000681600
+bubblesort,almost rising,0,1000,1,499500,0.000824300
+bubblesort,almost rising,0,1000,2,499500,0.000761900
+bubblesort,almost rising,0,1000,3,499500,0.000763300
+insertion,random,0,1000,1,242909,0.000574100
+insertion,random,0,1000,2,253604,0.000626600
+insertion,random,0,1000,3,254197,0.000628600
+insertion,rising,0,1000,1,999,0.000001900
+insertion,rising,0,1000,2,999,0.000001800
+insertion,rising,0,1000,3,999,0.000001700
+insertion,almost rising,0,1000,1,14105,0.000033900
+insertion,almost rising,0,1000,2,12749,0.000032000
+insertion,almost rising,0,1000,3,16041,0.000037300
+merge sort,random,0,1000,1,8736,0.000107200
+merge sort,random,0,1000,2,8728,0.000095400
+merge sort,random,0,1000,3,8715,0.000092100
+merge sort,rising,0,1000,1,4932,0.000069700
+merge sort,rising,0,1000,2,4932,0.000063100
+merge sort,rising,0,1000,3,4932,0.000062300
+merge sort,almost rising,0,1000,1,6558,0.000070800
+merge sort,almost rising,0,1000,2,6882,0.000072800
+merge sort,almost rising,0,1000,3,6730,0.000072700
+high pivot quicksort,random,0,1000,1,10906,0.000069300
+high pivot quicksort,random,0,1000,2,11391,0.000065500
+high pivot quicksort,random,0,1000,3,12433,0.000066400
+high pivot quicksort,rising,0,1000,1,500500,0.001281400
+high pivot quicksort,rising,0,1000,2,500500,0.001456800
+high pivot quicksort,rising,0,1000,3,500500,0.001218700
+high pivot quicksort,almost rising,0,1000,1,143223,0.000324500
+high pivot quicksort,almost rising,0,1000,2,54092,0.000116700
+high pivot quicksort,almost rising,0,1000,3,89699,0.000183000
+selection,random,0,1000,1,499500,0.001759700
+selection,random,0,1000,2,499500,0.001721100
+selection,random,0,1000,3,499500,0.001649200
+selection,rising,0,1000,1,499500,0.001660600
+selection,rising,0,1000,2,499500,0.001616000
+selection,rising,0,1000,3,499500,0.001636400
+selection,almost rising,0,1000,1,499500,0.001684400
+selection,almost rising,0,1000,2,499500,0.001656000
+selection,almost rising,0,1000,3,499500,0.001641200
+stdlib qsort,random,0,1000,1,0,0.000057100
+stdlib qsort,random,0,1000,2,0,0.000055500
+stdlib qsort,random,0,1000,3,0,0.000052400
+stdlib qsort,rising,0,1000,1,0,0.000016800
+stdlib qsort,rising,0,1000,2,0,0.000016200
+stdlib qsort,rising,0,1000,3,0,0.000015900
+stdlib qsort,almost rising,0,1000,1,0,0.000021300
+stdlib qsort,almost rising,0,1000,2,0,0.000022900
+stdlib qsort,almost rising,0,1000,3,0,0.000021100
+deterministic bogosort,random,2,1000,1,1073741824,7.013617700
+deterministic bogosort,random,2,1000,2,1073741824,7.079163500
+deterministic bogosort,random,2,1000,3,1073741824,6.048537100
+deterministic bogosort,rising,0,1000,1,999,0.000003400
+deterministic bogosort,rising,0,1000,2,999,0.000002000
+deterministic bogosort,rising,0,1000,3,999,0.000001900
+deterministic bogosort,almost rising,2,1000,1,1073741824,6.017727100
+deterministic bogosort,almost rising,2,1000,2,1073741824,6.059264200
+deterministic bogosort,almost rising,2,1000,3,1073741824,6.018691000
+extended radix sort,random,0,1000,1,0,0.000048700
+extended radix sort,random,0,1000,2,0,0.000054700
+extended radix sort,random,0,1000,3,0,0.000037700
+extended radix sort,rising,0,1000,1,0,0.000058000
+extended radix sort,rising,0,1000,2,0,0.000014700
+extended radix sort,rising,0,1000,3,0,0.000012300
+extended radix sort,almost rising,0,1000,1,0,0.000014600
+extended radix sort,almost rising,0,1000,2,0,0.000013000
+extended radix sort,almost rising,0,1000,3,0,0.000013900
+bubblesort,random,0,10000,1,49995000,1.059866000
+bubblesort,random,0,10000,2,49995000,1.058657500
+bubblesort,random,0,10000,3,49995000,1.058033100
+bubblesort,rising,0,10000,1,49995000,0.080766200
+bubblesort,rising,0,10000,2,49995000,0.075656700
+bubblesort,rising,0,10000,3,49995000,1.003628900
+bubblesort,almost rising,0,10000,1,49995000,0.080369100
+bubblesort,almost rising,0,10000,2,49995000,0.076407700
+bubblesort,almost rising,0,10000,3,49995000,0.074602100
+insertion,random,0,10000,1,25031850,0.059509700
+insertion,random,0,10000,2,24944662,0.058082400
+insertion,random,0,10000,3,25014393,0.057815400
+insertion,rising,0,10000,1,9999,0.000013300
+insertion,rising,0,10000,2,9999,0.000014100
+insertion,rising,0,10000,3,9999,0.000012900
+insertion,almost rising,0,10000,1,89321,0.000563100
+insertion,almost rising,0,10000,2,136329,0.000304700
+insertion,almost rising,0,10000,3,115685,0.000257900
+merge sort,random,0,10000,1,120494,0.001149300
+merge sort,random,0,10000,2,120455,0.001158700
+merge sort,random,0,10000,3,120381,0.001586000
+merge sort,rising,0,10000,1,64608,0.000640700
+merge sort,rising,0,10000,2,64608,0.000610500
+merge sort,rising,0,10000,3,64608,0.000611100
+merge sort,almost rising,0,10000,1,84150,0.000641500
+merge sort,almost rising,0,10000,2,82495,0.000630900
+merge sort,almost rising,0,10000,3,82799,0.000647900
+high pivot quicksort,random,0,10000,1,163156,0.000693400
+high pivot quicksort,random,0,10000,2,164921,0.000668700
+high pivot quicksort,random,0,10000,3,165335,0.000726400
+high pivot quicksort,rising,0,10000,1,50005000,1.025089000
+high pivot quicksort,rising,0,10000,2,50005000,1.026355900
+high pivot quicksort,rising,0,10000,3,50005000,1.031744400
+high pivot quicksort,almost rising,0,10000,1,6288199,0.013754000
+high pivot quicksort,almost rising,0,10000,2,14572048,0.038229800
+high pivot quicksort,almost rising,0,10000,3,8811816,0.019668100
+selection,random,0,10000,1,49995000,1.065541800
+selection,random,0,10000,2,49995000,1.063534600
+selection,random,0,10000,3,49995000,1.063389900
+selection,rising,0,10000,1,49995000,1.061171700
+selection,rising,0,10000,2,49995000,1.062929500
+selection,rising,0,10000,3,49995000,1.064572600
+selection,almost rising,0,10000,1,49995000,1.068500200
+selection,almost rising,0,10000,2,49995000,1.063781200
+selection,almost rising,0,10000,3,49995000,1.063047900
+stdlib qsort,random,0,10000,1,0,0.001033200
+stdlib qsort,random,0,10000,2,0,0.000961500
+stdlib qsort,random,0,10000,3,0,0.001078300
+stdlib qsort,rising,0,10000,1,0,0.000186300
+stdlib qsort,rising,0,10000,2,0,0.000186100
+stdlib qsort,rising,0,10000,3,0,0.000185900
+stdlib qsort,almost rising,0,10000,1,0,0.000187400
+stdlib qsort,almost rising,0,10000,2,0,0.000183600
+stdlib qsort,almost rising,0,10000,3,0,0.000192000
+deterministic bogosort,random,2,10000,1,1073741824,8.026034000
+deterministic bogosort,random,2,10000,2,1073741824,9.094245000
+deterministic bogosort,random,2,10000,3,1073741824,11.002779700
+deterministic bogosort,rising,0,10000,1,9999,0.000078100
+deterministic bogosort,rising,0,10000,2,9999,0.000037700
+deterministic bogosort,rising,0,10000,3,9999,0.000037700
+deterministic bogosort,almost rising,2,10000,1,1073741824,11.006917500
+deterministic bogosort,almost rising,2,10000,2,1073741824,9.090925900
+deterministic bogosort,almost rising,2,10000,3,1073741824,10.037420100
+extended radix sort,random,0,10000,1,0,0.000583800
+extended radix sort,random,0,10000,2,0,0.000526900
+extended radix sort,random,0,10000,3,0,0.000544000
+extended radix sort,rising,0,10000,1,0,0.000522400
+extended radix sort,rising,0,10000,2,0,0.000574200
+extended radix sort,rising,0,10000,3,0,0.000537900
+extended radix sort,almost rising,0,10000,1,0,0.000520200
+extended radix sort,almost rising,0,10000,2,0,0.000502800
+extended radix sort,almost rising,0,10000,3,0,0.000554300
+bubblesort,random,2,100000,1,1073741824,14.088142400
+bubblesort,random,2,100000,2,1073741824,14.082308100
+bubblesort,random,2,100000,3,1073741824,14.055372000
+bubblesort,rising,2,100000,1,1073741824,12.041331800
+bubblesort,rising,2,100000,2,1073741824,12.045943400
+bubblesort,rising,2,100000,3,1073741824,12.039756500
+bubblesort,almost rising,2,100000,1,1073741824,12.040321600
+bubblesort,almost rising,2,100000,2,1073741824,12.044910200
+bubblesort,almost rising,2,100000,3,1073741824,12.044486100
+insertion,random,2,100000,1,1073741824,13.054710100
+insertion,random,2,100000,2,1073741824,13.061963600
+insertion,random,2,100000,3,1073741824,13.078324700
+insertion,rising,0,100000,1,99999,0.000428600
+insertion,rising,0,100000,2,99999,0.000427300
+insertion,rising,0,100000,3,99999,0.000425400
+insertion,almost rising,0,100000,1,1299921,0.006980600
+insertion,almost rising,0,100000,2,946699,0.005465600
+insertion,almost rising,0,100000,3,1419875,0.007683200
+merge sort,random,0,100000,1,1536252,0.023212900
+merge sort,random,0,100000,2,1536611,0.026442100
+merge sort,random,0,100000,3,1536426,0.026756700
+merge sort,rising,0,100000,1,815024,0.016405000
+merge sort,rising,0,100000,2,815024,0.016266800
+merge sort,rising,0,100000,3,815024,0.016791800
+merge sort,almost rising,0,100000,1,979918,0.016995600
+merge sort,almost rising,0,100000,2,961210,0.016883400
+merge sort,almost rising,0,100000,3,989497,0.016945000
+high pivot quicksort,random,0,100000,1,2028907,0.015516800
+high pivot quicksort,random,0,100000,2,2053143,0.015253200
+high pivot quicksort,random,0,100000,3,2027880,0.015630400
+high pivot quicksort,rising,2,100000,1,1073741824,8.000581600
+high pivot quicksort,rising,2,100000,2,1073741824,7.065535400
+high pivot quicksort,rising,2,100000,3,1073741824,8.001533400
+high pivot quicksort,almost rising,0,100000,1,864821324,8.077021600
+high pivot quicksort,almost rising,0,100000,2,1061862641,6.034650300
+high pivot quicksort,almost rising,2,100000,3,1073741824,9.026026200
+selection,random,2,100000,1,1073741824,7.025321500
+selection,random,2,100000,2,1073741824,7.023428000
+selection,random,2,100000,3,1073741824,7.023925600
+selection,rising,2,100000,1,1073741824,7.023022400
+selection,rising,2,100000,2,1073741824,7.023012400
+selection,rising,2,100000,3,1073741824,7.026925100
+selection,almost rising,2,100000,1,1073741824,7.009633200
+selection,almost rising,2,100000,2,1073741824,7.030554900
+selection,almost rising,2,100000,3,1073741824,7.029865300
+stdlib qsort,random,0,100000,1,0,0.011001300
+stdlib qsort,random,0,100000,2,0,0.013869000
+stdlib qsort,random,0,100000,3,0,0.014636600
+stdlib qsort,rising,0,100000,1,0,0.007209900
+stdlib qsort,rising,0,100000,2,0,0.005253500
+stdlib qsort,rising,0,100000,3,0,0.005325500
+stdlib qsort,almost rising,0,100000,1,0,0.006197800
+stdlib qsort,almost rising,0,100000,2,0,0.005438300
+stdlib qsort,almost rising,0,100000,3,0,0.005425200
+deterministic bogosort,random,2,100000,1,1073741824,12.095030100
+deterministic bogosort,random,2,100000,2,1073741824,13.012603300
+deterministic bogosort,random,2,100000,3,1073741824,13.008814500
+deterministic bogosort,rising,0,100000,1,99999,0.000494500
+deterministic bogosort,rising,0,100000,2,99999,0.000696500
+deterministic bogosort,rising,0,100000,3,99999,0.000423000
+deterministic bogosort,almost rising,2,100000,1,1073741824,10.041453000
+deterministic bogosort,almost rising,2,100000,2,1073741824,11.034443200
+deterministic bogosort,almost rising,2,100000,3,1073741824,11.008884100
+extended radix sort,random,0,100000,1,0,0.005532700
+extended radix sort,random,0,100000,2,0,0.005773300
+extended radix sort,random,0,100000,3,0,0.005929200
+extended radix sort,rising,0,100000,1,0,0.004859600
+extended radix sort,rising,0,100000,2,0,0.005061300
+extended radix sort,rising,0,100000,3,0,0.005778500
+extended radix sort,almost rising,0,100000,1,0,0.004866500
+extended radix sort,almost rising,0,100000,2,0,0.005017400
+extended radix sort,almost rising,0,100000,3,0,0.005757700
+bubblesort,random,2,1000000,1,1073741824,6.053623700
+bubblesort,random,2,1000000,2,1073741824,6.051353800
+bubblesort,random,2,1000000,3,1073741824,6.054007900
+bubblesort,rising,2,1000000,1,1073741824,12.029175300
+bubblesort,rising,2,1000000,2,1073741824,12.042727700
+bubblesort,rising,2,1000000,3,1073741824,12.066715900
+bubblesort,almost rising,2,1000000,1,1073741824,12.056581800
+bubblesort,almost rising,2,1000000,2,1073741824,12.058088000
+bubblesort,almost rising,2,1000000,3,1073741824,12.081637400
+insertion,random,2,1000000,1,1073741824,13.071019500
+insertion,random,2,1000000,2,1073741824,13.073386700
+insertion,random,2,1000000,3,1073741824,6.027513000
+insertion,rising,0,1000000,1,999999,0.001511800
+insertion,rising,0,1000000,2,999999,0.001363100
+insertion,rising,0,1000000,3,999999,0.001363500
+insertion,almost rising,0,1000000,1,10823553,0.024172000
+insertion,almost rising,0,1000000,2,10217863,0.022259700
+insertion,almost rising,0,1000000,3,11878733,0.029008300
+merge sort,random,0,1000000,1,18674179,1.066014000
+merge sort,random,0,1000000,2,18674519,1.064139900
+merge sort,random,0,1000000,3,18674189,1.065527200
+merge sort,rising,0,1000000,1,9884992,0.074110600
+merge sort,rising,0,1000000,2,9884992,0.075414400
+merge sort,rising,0,1000000,3,9884992,0.075709000
+merge sort,almost rising,0,1000000,1,11644233,0.078464100
+merge sort,almost rising,0,1000000,2,11639656,0.079692700
+merge sort,almost rising,0,1000000,3,11935886,0.080285500
+high pivot quicksort,random,0,1000000,1,24814905,1.002819700
+high pivot quicksort,random,0,1000000,2,25106161,1.004838300
+high pivot quicksort,random,0,1000000,3,27317314,1.009934600
+high pivot quicksort,rising,2,1000000,1,1073741824,8.068981700
+high pivot quicksort,rising,2,1000000,2,1073741824,8.041778900
+high pivot quicksort,rising,2,1000000,3,1073741824,8.090203600
+high pivot quicksort,almost rising,2,1000000,1,1073741824,9.028671300
+high pivot quicksort,almost rising,2,1000000,2,1073741824,9.026591100
+high pivot quicksort,almost rising,2,1000000,3,1073741824,8.099282600
+selection,random,2,1000000,1,1073741824,7.038567900
+selection,random,2,1000000,2,1073741824,7.005846200
+selection,random,2,1000000,3,1073741824,7.017920900
+selection,rising,2,1000000,1,1073741824,7.049775300
+selection,rising,2,1000000,2,1073741824,7.060041600
+selection,rising,2,1000000,3,1073741824,7.081606600
+selection,almost rising,2,1000000,1,1073741824,7.060305900
+selection,almost rising,2,1000000,2,1073741824,7.082689600
+selection,almost rising,2,1000000,3,1073741824,7.074738600
+stdlib qsort,random,0,1000000,1,0,0.095760400
+stdlib qsort,random,0,1000000,2,0,0.097292000
+stdlib qsort,random,0,1000000,3,0,0.097083300
+stdlib qsort,rising,0,1000000,1,0,0.031892300
+stdlib qsort,rising,0,1000000,2,0,0.028744100
+stdlib qsort,rising,0,1000000,3,0,0.027789900
+stdlib qsort,almost rising,0,1000000,1,0,0.028387800
+stdlib qsort,almost rising,0,1000000,2,0,0.028038700
+stdlib qsort,almost rising,0,1000000,3,0,0.029113800
+deterministic bogosort,random,2,1000000,1,1073741824,7.018122500
+deterministic bogosort,random,2,1000000,2,1073741824,7.012930000
+deterministic bogosort,random,2,1000000,3,1073741824,6.082777100
+deterministic bogosort,rising,0,1000000,1,999999,0.002877200
+deterministic bogosort,rising,0,1000000,2,999999,0.002965700
+deterministic bogosort,rising,0,1000000,3,999999,0.003631700
+deterministic bogosort,almost rising,2,1000000,1,1073741824,6.025974000
+deterministic bogosort,almost rising,2,1000000,2,1073741824,7.019481100
+deterministic bogosort,almost rising,2,1000000,3,1073741824,6.022579000
+extended radix sort,random,0,1000000,1,0,0.020927000
+extended radix sort,random,0,1000000,2,0,0.025217300
+extended radix sort,random,0,1000000,3,0,0.019062300
+extended radix sort,rising,0,1000000,1,0,0.021366400
+extended radix sort,rising,0,1000000,2,0,0.021133900
+extended radix sort,rising,0,1000000,3,0,0.022178100
+extended radix sort,almost rising,0,1000000,1,0,0.022116300
+extended radix sort,almost rising,0,1000000,2,0,0.021535500
+extended radix sort,almost rising,0,1000000,3,0,0.021686800
+bubblesort,random,2,10000000,1,1073741824,7.066705800
+bubblesort,random,2,10000000,2,1073741824,7.033042900
+bubblesort,random,2,10000000,3,1073741824,7.052253900
+bubblesort,rising,2,10000000,1,1073741824,7.040450200
+bubblesort,rising,2,10000000,2,1073741824,7.055999000
+bubblesort,rising,2,10000000,3,1073741824,7.055791100
+bubblesort,almost rising,2,10000000,1,1073741824,8.027560800
+bubblesort,almost rising,2,10000000,2,1073741824,8.030230300
+bubblesort,almost rising,2,10000000,3,1073741824,7.096735700
+insertion,random,2,10000000,1,1073741824,8.051106500
+insertion,random,2,10000000,2,1073741824,9.013975100
+insertion,random,2,10000000,3,1073741824,9.052449800
+insertion,rising,0,10000000,1,9999999,0.015607000
+insertion,rising,0,10000000,2,9999999,0.015357700
+insertion,rising,0,10000000,3,9999999,0.014630600
+insertion,almost rising,0,10000000,1,134781135,5.030283700
+insertion,almost rising,0,10000000,2,113448089,6.009079400
+insertion,almost rising,0,10000000,3,158493169,8.075864900
+merge sort,random,0,10000000,1,220103085,8.057451400
+merge sort,random,0,10000000,2,220104623,8.068010500
+merge sort,random,0,10000000,3,220097104,8.061858000
+merge sort,rising,0,10000000,1,114434624,3.002920600
+merge sort,rising,0,10000000,2,114434624,3.000484200
+merge sort,rising,0,10000000,3,114434624,2.090055200
+merge sort,almost rising,0,10000000,1,129691889,3.050671500
+merge sort,almost rising,0,10000000,2,130261234,3.059413400
+merge sort,almost rising,0,10000000,3,132323349,3.089218600
+high pivot quicksort,random,0,10000000,1,300704717,4.031393100
+high pivot quicksort,random,0,10000000,2,294218384,3.099286500
+high pivot quicksort,random,0,10000000,3,309861028,4.045305000
+high pivot quicksort,rising,2,10000000,1,1073741824,8.049563600
+high pivot quicksort,rising,2,10000000,2,1073741824,8.039254500
+high pivot quicksort,rising,2,10000000,3,1073741824,8.040651800
+high pivot quicksort,almost rising,2,10000000,1,1073741824,8.036189000
+high pivot quicksort,almost rising,2,10000000,2,1073741824,7.098089300
+high pivot quicksort,almost rising,2,10000000,3,1073741824,8.035615400
+selection,random,2,10000000,1,1073741824,7.075672700
+selection,random,2,10000000,2,1073741824,7.077681000
+selection,random,2,10000000,3,1073741824,7.084278200
+selection,rising,2,10000000,1,1073741824,7.076284300
+selection,rising,2,10000000,2,1073741824,7.052277900
+selection,rising,2,10000000,3,1073741824,7.080794900
+selection,almost rising,2,10000000,1,1073741824,7.085823800
+selection,almost rising,2,10000000,2,1073741824,7.066810100
+selection,almost rising,2,10000000,3,1073741824,7.084709400
+stdlib qsort,random,0,10000000,1,0,10.019399900
+stdlib qsort,random,0,10000000,2,0,10.017165500
+stdlib qsort,random,0,10000000,3,0,10.028774100
+stdlib qsort,rising,0,10000000,1,0,7.093619900
+stdlib qsort,rising,0,10000000,2,0,7.042843000
+stdlib qsort,rising,0,10000000,3,0,5.061555500
+stdlib qsort,almost rising,0,10000000,1,0,3.037543700
+stdlib qsort,almost rising,0,10000000,2,0,3.036872400
+stdlib qsort,almost rising,0,10000000,3,0,3.041833700
+deterministic bogosort,random,2,10000000,1,1073741824,7.061167400
+deterministic bogosort,random,2,10000000,2,1073741824,7.079350200
+deterministic bogosort,random,2,10000000,3,1073741824,8.025234100
+deterministic bogosort,rising,0,10000000,1,9999999,0.029562000
+deterministic bogosort,rising,0,10000000,2,9999999,0.029294900
+deterministic bogosort,rising,0,10000000,3,9999999,0.034683800
+deterministic bogosort,almost rising,2,10000000,1,1073741824,7.060917500
+deterministic bogosort,almost rising,2,10000000,2,1073741824,7.095639800
+deterministic bogosort,almost rising,2,10000000,3,1073741824,7.052952600
+extended radix sort,random,0,10000000,1,0,2.030289800
+extended radix sort,random,0,10000000,2,0,2.021665800
+extended radix sort,random,0,10000000,3,0,2.033425400
+extended radix sort,rising,0,10000000,1,0,2.034046700
+extended radix sort,rising,0,10000000,2,0,2.042007000
+extended radix sort,rising,0,10000000,3,0,2.057892400
+extended radix sort,almost rising,0,10000000,1,0,2.036855400
+extended radix sort,almost rising,0,10000000,2,0,2.040671800
+extended radix sort,almost rising,0,10000000,3,0,2.034887800

@@ -31,6 +31,9 @@
     <ClCompile Include="algo_bogosort.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="algo_eradix_sort.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="algo_bubblesort.h">
@@ -61,6 +64,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="algo_bogosort.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="algo_eradix_sort.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

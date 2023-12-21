@@ -284,9 +284,38 @@
 \end{algorithmic}
 \end{algorithm}
 
-\subsection{基于分布的排序算法}
+\subsection{扩展基数排序}
 
-计数排序、 桶排序与基数排序是典型的基于输入数据分布的排序. 与基于比较的排序算法不同, 基于分布的排序算法通过对数据施加约束的方法进行问题特定的排序. 由于该种算法无法在未知数据分布的情况下高效实现, 我们将不会在此讨论基于分布的排序算法.
+如算法 \ref{algo_radix} 描述的扩展基数排序是基于分布而不是比较排序的一种. 它以每一 "数位" 为单元, 由最低数位到最高数位依次进行计数排序. 给定一满足数位权重递增规律的数位提取函数 $\mathsf{Digit}(\cdot, \cdot),$ 以及一数位计数函数 $\mathsf{NDigits(\cdot)},$ 则定义于其上的扩展基数排序具有确定行为.
+
+\begin{algorithm}[H]
+\caption{扩展基数排序.}
+\label{algo_radix}
+\begin{algorithmic}[1]
+\Require 待排序数组 $\bm{a},$ 数位提取函数 $\mathsf{Digit}(\cdot, \cdot),$ 数位计数函数 $\mathsf{NDigits(\cdot)},$ 待排序数组长度 $n.$
+\Ensure 排序完成的数组.
+\State $m \gets \mathsf{NDigits}(\bm{a}\ \text{中元素的类型})$
+\State $\bm{b} \gets$ 长度为 $n$ 的数组
+\For{$i \gets 1 \dots m$}
+    \State $k \gets \mathrm{Card}\left(\mathrm{R}(\mathsf{Digit}(\bm{a}\ \text{中元素的类型}, i))\right)$
+    \State $\bm{d} \gets$ 长度为 $k$ 的全零数组
+    \For{$j \gets 1 \dots n$}
+        \State $t \gets \mathsf{Digit}(\bm{a}[j], i)$
+        \State $\bm{d}[j] \gets \bm{d}[j] + 1$
+    \EndFor
+    \For{$j \gets 2 \dots k$}
+        \State $\bm{d}[j] \gets \bm{d}[j] + \bm{d}[j - 1]$
+    \EndFor
+    \For{$j \gets n \dots 1$}
+        \State $t \gets \mathsf{Digit}(\bm{a}[j], i)$
+        \State $\bm{b}[\bm{d}[t]] \gets \bm{a}[j]$
+        \State $\bm{d}[t] \gets \bm{d}[t] - 1$
+    \EndFor
+    \State $\bm{a} \gets \bm{b}$
+\EndFor
+\State \Return $\bm{a}$
+\end{algorithmic}
+\end{algorithm}
 
 \section{实验设计}
 
@@ -394,7 +423,8 @@
     \caption{不同规模的随机分布输入下排序算法的平均耗时统计}
     \begin{tabular}{cccccc}
         \toprule
-         & 1e3 & 1e4 & 1e5 & 1e6 & 1e7 \\
+         & \multicolumn{5}{c}{输入规模} \\
+        排序算法 & 1e3 & 1e4 & 1e5 & 1e6 & 1e7 \\
         \midrule
         冒泡 & 0.001141 & 2.702836 & 13.730024* & 6.077534* & 7.011685* \\
         直接插入 & 0.000652 & 1.036735 & 13.070797* & 13.070870* & 11.028969* \\
@@ -403,6 +433,7 @@
         直接选择 & 0.001589 & 2.042786 & 7.027422* & 7.048163* & 7.075249* \\
         标准库 \texttt{qsort} & 0.000051 & 0.001383 & 0.014345 & 1.067867 & 10.018054 \\
         确定性 Bogosort & 8.739827* & 11.071495* & 11.709166* & 13.703622* & 11.710889* \\
+        扩展基数 & 0.000047 & 0.000552 & 0.005745 & 0.021736 & 2.028460 \\
         \bottomrule
     \end{tabular}
     \begin{tablenotes}
@@ -420,7 +451,8 @@
     \caption{不同规模的几乎有序输入下排序算法的平均耗时统计}
     \begin{tabular}{cccccc}
         \toprule
-         & 1e3 & 1e4 & 1e5 & 1e6 & 1e7 \\
+         & \multicolumn{5}{c}{输入规模} \\
+        排序算法 & 1e3 & 1e4 & 1e5 & 1e6 & 1e7 \\
         \midrule
         冒泡 & 0.000832 & 1.086718 & 12.082078* & 6.707536* & 5.036540* \\
         直接插入 & 0.000026 & 0.000666 & 0.006648 & 0.067337 & 5.374296 \\
@@ -429,6 +461,7 @@
         直接选择 & 0.001601 & 2.042761 & 7.019613* & 7.042990* & 7.395880* \\
         标准库 \texttt{qsort} & 0.000016 & 0.000451 & 0.014345 & 0.070739 & 7.051840 \\
         确定性 Bogosort & 11.397016* & 10.738460* & 11.379927* & 11.389746* & 11.695746* \\
+        扩展基数 & 0.000014 & 0.000526 & 0.005214 & 0.021780 & 2.037472 \\
         \bottomrule
     \end{tabular}
     \begin{tablenotes}
@@ -458,6 +491,10 @@
 \subsection{基于全排列的排序性能}
 
 基于 QuickPerm 的 Bogosort 求取给定数组元素的全排列直到完全有序. 显然, 最坏情况下需要进行 $n!(n-1)$ 次比较才能确定其已完全排列. 显然, 该算法缺少实际应用价值, 仅仅作为一种有趣的慢速排序算法在这里进行讨论.
+
+\subsection{基于分布的排序性能}
+
+扩展基数排序排序在所有输入规模下性能良好, 这主要归因于它的运行时间随输入增多而线性增加. 在扩展基数排序的前提有意义时, 它是一种高效的排序算法.
 
 \section{小结}
 
@@ -724,6 +761,56 @@ algo_errno_t bogosort_determ(void *arr, size_t count, size_t size, comp_t comp, 
 }
 \end{lstlisting}
 
+\subsection{扩展基数排序}
+
+\begin{lstlisting}[language=C]
+#define NYBBLES_IN_BYTES_(b_) ((b_) * 2)
+#define GET_NYBBLE_LOC_NTH_BYTE_(n_nybble_) ((n_nybble_) / 2)
+#define GET_NYBBLE_LOC_OFFSET_(n_nybble_) ((n_nybble) % 2)
+#define GET_NTH_NYBBLE_(a_, n_nybble_) (((a_)[GET_NYBBLE_LOC_NTH_BYTE_(n_nybble_)] >> (GET_NYBBLE_LOC_OFFSET_(n_nybble_) * 4)) & 0xFu)
+
+static algo_errno_t count_sort(void *arr, size_t count, size_t size, size_t n_nybble) {
+    uint8_t *arr_ = arr;
+    size_t cnt_nybble[0x10u] = {0};
+
+    uint8_t *output = (uint8_t *)malloc(count * size * sizeof(uint8_t));
+    PTR_ASSERT_NONNULL(output);
+
+    for (size_t i = 0; i < count; i++) {
+        uint8_t nybble = GET_NTH_NYBBLE_(arr_ + i * size, n_nybble);
+        cnt_nybble[nybble]++;
+    }
+
+    for (size_t i = 0x1u; i <= 0xFu; i++) {
+        cnt_nybble[i] += cnt_nybble[i - 1];
+    }
+
+    for (size_t i = count - 1; i != SIZE_MAX; i--) {
+        uint8_t nybble = GET_NTH_NYBBLE_(arr_ + i * size, n_nybble);
+        uint8_t *elem_pos = output + (cnt_nybble[nybble] - 1) * size;
+        memcpy(elem_pos, arr_ + i * size, size * sizeof(uint8_t));
+        cnt_nybble[nybble]--;
+    }
+
+    memcpy(arr_, output, count * size * sizeof(uint8_t));
+
+    free(output);
+    return OK;
+}
+
+algo_errno_t eradix_sort(void *arr, size_t count, size_t size, comp_t comp, uint64_t threshold, uint64_t *out_counter) {
+    *out_counter = 0;
+
+    size_t nybbles = NYBBLES_IN_BYTES_(size);
+
+    for (size_t n_nybble = 0; n_nybble < nybbles; n_nybble++) {
+        ALGO_ERRNO_UNWRAP(count_sort(arr, count, size, n_nybble));
+    }
+
+    return OK;
+}
+\end{lstlisting}
+
 \section{附录: 测试驱动程序}
 
 在本附录中, 我们给出得到实验结果时所使用的测试驱动程序. 该程序向 \texttt{stdout} 输出 CSV 格式的机器可读结果信息, 同时向 \texttt{stderr} 输出人可读的进度与结果信息.
@@ -884,7 +971,7 @@ static void bench_rand(MTRand_t *restrict rng, const named_algo_t *restrict al, 
         } else {
             PRINT_BAD("algo \"%s\": random - round %" PRId32 ": error - %" PRIu64 " comps - %" PRIdMAX ".%09" PRId32 " sec\n", sorter_name, i + 1, cur.comp_count, (intmax_t)cur.diff.tv_sec, cur.diff.tv_nsec);
         }
-        printf("%s,random,%" PRId32 ",%" PRId32 ",%" PRIu64 ",%" PRIdMAX ".%09" PRId32 "\n", sorter_name, cur.retval, i + 1, cur.comp_count, (intmax_t)cur.diff.tv_sec, cur.diff.tv_nsec);
+        printf("%s,random,%" PRId32 ",%" PRIuMAX ",%" PRId32 ",%" PRIu64 ",%" PRIdMAX ".%09" PRId32 "\n", sorter_name, cur.retval, (uintmax_t)n_elem, i + 1, cur.comp_count, (intmax_t)cur.diff.tv_sec, cur.diff.tv_nsec);
     }
 }
 
@@ -902,7 +989,7 @@ static void bench_rising(MTRand_t *restrict rng, const named_algo_t *restrict al
         } else {
             PRINT_BAD("algo \"%s\": rising - round %" PRId32 ": error - %" PRIu64 " comps - %" PRIdMAX ".%09" PRId32 " sec\n", sorter_name, i + 1, cur.comp_count, (intmax_t)cur.diff.tv_sec, cur.diff.tv_nsec);
         }
-        printf("%s,rising,%" PRId32 ",%" PRId32 ",%" PRIu64 ",%" PRIdMAX ".%09" PRId32 "\n", sorter_name, cur.retval, i + 1, cur.comp_count, (intmax_t)cur.diff.tv_sec, cur.diff.tv_nsec);
+        printf("%s,rising,%" PRId32 ",%" PRIuMAX ",%" PRId32 ",%" PRIu64 ",%" PRIdMAX ".%09" PRId32 "\n", sorter_name, cur.retval, (uintmax_t)n_elem, i + 1, cur.comp_count, (intmax_t)cur.diff.tv_sec, cur.diff.tv_nsec);
     }
 }
 
@@ -920,7 +1007,7 @@ static void bench_almost_rising(MTRand_t *restrict rng, const named_algo_t *rest
         } else {
             PRINT_BAD("algo \"%s\": almost rising - round %" PRId32 ": error - %" PRIu64 " comps - %" PRIdMAX ".%09" PRId32 " sec\n", sorter_name, i + 1, cur.comp_count, (intmax_t)cur.diff.tv_sec, cur.diff.tv_nsec);
         }
-        printf("%s,almost rising,%" PRId32 ",%" PRId32 ",%" PRIu64 ",%" PRIdMAX ".%09" PRId32 "\n", sorter_name, cur.retval, i + 1, cur.comp_count, (intmax_t)cur.diff.tv_sec, cur.diff.tv_nsec);
+        printf("%s,almost rising,%" PRId32 ",%" PRIuMAX ",%" PRId32 ",%" PRIu64 ",%" PRIdMAX ".%09" PRId32 "\n", sorter_name, cur.retval, (uintmax_t)n_elem, i + 1, cur.comp_count, (intmax_t)cur.diff.tv_sec, cur.diff.tv_nsec);
     }
 }
 
@@ -931,7 +1018,7 @@ int main(void) {
 
     mt_seed_rand(&rng, (unsigned long)time(NULL));
 
-    printf("algo name,input dist,retval,round no,n comps,time sec\n");
+    printf("algo name,input dist,retval,n elem,round no,n comps,time sec\n");
 
     PRINT_INFO("Checking correctness of algorithms\n");
     for (const named_algo_t *al = ALGOS; al->algo != NULL; al++) {

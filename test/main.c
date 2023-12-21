@@ -153,7 +153,7 @@ static void bench_rand(MTRand_t *restrict rng, const named_algo_t *restrict al, 
         } else {
             PRINT_BAD("algo \"%s\": random - round %" PRId32 ": error - %" PRIu64 " comps - %" PRIdMAX ".%09" PRId32 " sec\n", sorter_name, i + 1, cur.comp_count, (intmax_t)cur.diff.tv_sec, cur.diff.tv_nsec);
         }
-        printf("%s,random,%" PRId32 ",%" PRId32 ",%" PRIu64 ",%" PRIdMAX ".%09" PRId32 "\n", sorter_name, cur.retval, i + 1, cur.comp_count, (intmax_t)cur.diff.tv_sec, cur.diff.tv_nsec);
+        printf("%s,random,%" PRId32 ",%" PRIuMAX ",%" PRId32 ",%" PRIu64 ",%" PRIdMAX ".%09" PRId32 "\n", sorter_name, cur.retval, (uintmax_t)n_elem, i + 1, cur.comp_count, (intmax_t)cur.diff.tv_sec, cur.diff.tv_nsec);
     }
 }
 
@@ -171,7 +171,7 @@ static void bench_rising(MTRand_t *restrict rng, const named_algo_t *restrict al
         } else {
             PRINT_BAD("algo \"%s\": rising - round %" PRId32 ": error - %" PRIu64 " comps - %" PRIdMAX ".%09" PRId32 " sec\n", sorter_name, i + 1, cur.comp_count, (intmax_t)cur.diff.tv_sec, cur.diff.tv_nsec);
         }
-        printf("%s,rising,%" PRId32 ",%" PRId32 ",%" PRIu64 ",%" PRIdMAX ".%09" PRId32 "\n", sorter_name, cur.retval, i + 1, cur.comp_count, (intmax_t)cur.diff.tv_sec, cur.diff.tv_nsec);
+        printf("%s,rising,%" PRId32 ",%" PRIuMAX ",%" PRId32 ",%" PRIu64 ",%" PRIdMAX ".%09" PRId32 "\n", sorter_name, cur.retval, (uintmax_t)n_elem, i + 1, cur.comp_count, (intmax_t)cur.diff.tv_sec, cur.diff.tv_nsec);
     }
 }
 
@@ -189,7 +189,7 @@ static void bench_almost_rising(MTRand_t *restrict rng, const named_algo_t *rest
         } else {
             PRINT_BAD("algo \"%s\": almost rising - round %" PRId32 ": error - %" PRIu64 " comps - %" PRIdMAX ".%09" PRId32 " sec\n", sorter_name, i + 1, cur.comp_count, (intmax_t)cur.diff.tv_sec, cur.diff.tv_nsec);
         }
-        printf("%s,almost rising,%" PRId32 ",%" PRId32 ",%" PRIu64 ",%" PRIdMAX ".%09" PRId32 "\n", sorter_name, cur.retval, i + 1, cur.comp_count, (intmax_t)cur.diff.tv_sec, cur.diff.tv_nsec);
+        printf("%s,almost rising,%" PRId32 ",%" PRIuMAX ",%" PRId32 ",%" PRIu64 ",%" PRIdMAX ".%09" PRId32 "\n", sorter_name, cur.retval, (uintmax_t)n_elem, i + 1, cur.comp_count, (intmax_t)cur.diff.tv_sec, cur.diff.tv_nsec);
     }
 }
 
@@ -200,7 +200,7 @@ int main(void) {
 
     mt_seed_rand(&rng, (unsigned long)time(NULL));
 
-    printf("algo name,input dist,retval,round no,n comps,time sec\n");
+    printf("algo name,input dist,retval,n elem,round no,n comps,time sec\n");
 
     PRINT_INFO("Checking correctness of algorithms\n");
     for (const named_algo_t *al = ALGOS; al->algo != NULL; al++) {

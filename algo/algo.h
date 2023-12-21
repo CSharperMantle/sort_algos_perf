@@ -11,6 +11,7 @@
 #include "algo_selection_sort.h"
 #include "algo_stdlib_qsort.h"
 #include "algo_bogosort.h"
+#include "algo_eradix_sort.h"
 
 typedef struct named_algo_ {
 	const algo_t algo;

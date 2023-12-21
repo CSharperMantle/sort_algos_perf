@@ -22,6 +22,7 @@
     <ClInclude Include="algo.h" />
     <ClInclude Include="algo_bogosort.h" />
     <ClInclude Include="algo_bubblesort.h" />
+    <ClInclude Include="algo_eradix_sort.h" />
     <ClInclude Include="algo_insertion_sort.h" />
     <ClInclude Include="algo_merge_sort.h" />
     <ClInclude Include="algo_quicksort.h" />
@@ -34,6 +35,7 @@
     <ClCompile Include="algo.c" />
     <ClCompile Include="algo_bogosort.c" />
     <ClCompile Include="algo_bubblesort.c" />
+    <ClCompile Include="algo_eradix_sort.c" />
     <ClCompile Include="algo_insertion_sort.c" />
     <ClCompile Include="algo_merge_sort.c" />
     <ClCompile Include="algo_quicksort.c" />

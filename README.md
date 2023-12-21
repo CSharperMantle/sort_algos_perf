@@ -11,6 +11,7 @@ Compare the performance for various sorting algorithms, including:
 * Quicksort with high pivot location
 * `qsort` provided by `stdlib.h`
 * Deterministic Bogosort with QuickPerm
+* Extended radix sort
 
 ## Third-party libraries
 

@@ -14,7 +14,7 @@ typedef enum algo_errno_ {
 typedef int (*comp_t)(const void *, const void *);
 typedef algo_errno_t (*algo_t)(void *, size_t, size_t, comp_t, uint64_t, uint64_t *);
 
-void swap_bytes(void *restrict a, void *restrict b, size_t size);
+void swap_bytes(void *a, void *b, size_t size);
 
 #define PTR_ASSERT_NONNULL(p_) do { if ((p_) == NULL) { return INTERNAL_ERR; } } while (0)
 #define COUNTER_CHECK(c_, t_) do { if ((c_) > (t_)) { return TIMED_OUT; } } while (0)

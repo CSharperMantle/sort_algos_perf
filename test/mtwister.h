@@ -6,8 +6,8 @@
 
 #pragma once
 
-#ifndef MTWISTER_H_
-#define MTWISTER_H_
+#ifndef MTWISTER_H_INCLUDED_
+#define MTWISTER_H_INCLUDED_
 
 #define STATE_VECTOR_LENGTH 624
 #define STATE_VECTOR_M      397 /* changes to STATE_VECTOR_LENGTH also require changes to this */
@@ -21,4 +21,4 @@ void mt_seed_rand(MTRand_t *restrict rand, unsigned long seed);
 unsigned long mt_gen_rand_long(MTRand_t *restrict rand);
 double mt_gen_rand(MTRand_t *restrict rand);
 
-#endif // MTWISTER_H_
+#endif // MTWISTER_H_INCLUDED_

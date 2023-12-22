@@ -2,10 +2,10 @@
 #include "common.h"
 #include "algo_eradix_sort.h"
 
-#define NYBBLES_IN_BYTES_(b_) ((b_) * 2)
-#define GET_NYBBLE_LOC_NTH_BYTE_(n_nybble_) ((n_nybble_) / 2)
-#define GET_NYBBLE_LOC_OFFSET_(n_nybble_) ((n_nybble) % 2)
-#define GET_NTH_NYBBLE_(a_, n_nybble_) (((a_)[GET_NYBBLE_LOC_NTH_BYTE_(n_nybble_)] >> (GET_NYBBLE_LOC_OFFSET_(n_nybble_) * 4)) & 0xFu)
+#define NYBBLES_IN_BYTES_(b_) ((b_) * (CHAR_BIT / 4))
+#define GET_NYBBLE_LOC_NTH_BYTE_(n_nybble_) ((n_nybble_) / NYBBLES_IN_BYTES_(1))
+#define GET_NYBBLE_LOC_OFFSET_(n_nybble_) ((n_nybble) % NYBBLES_IN_BYTES_(1))
+#define GET_NTH_NYBBLE_(a_, n_nybble_) (((a_)[GET_NYBBLE_LOC_NTH_BYTE_(n_nybble_)] >> (GET_NYBBLE_LOC_OFFSET_(n_nybble_) * (CHAR_BIT / NYBBLES_IN_BYTES_(1)))) & 0xFu)
 
 static algo_errno_t count_sort(void *arr, size_t count, size_t size, size_t n_nybble) {
     uint8_t *arr_ = arr;
